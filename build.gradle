@@ -28,11 +28,14 @@ ext {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-authorization-server'
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+//  Security 관련
+//	implementation 'org.springframework.boot:spring-boot-starter-oauth2-authorization-server'
+//	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
+//	implementation ("org.springframework.security:spring-security-config:5.6.0")
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -41,7 +44,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-	implementation ("org.springframework.security:spring-security-config:5.6.0")
+
 	implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
 
 
