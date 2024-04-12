@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
-@Table(name = "member")
+@Table
 @ToString
 @NoArgsConstructor
 public class Member {
@@ -18,10 +18,10 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "email")
+    @Column
     private String email;
 
-    @Column(name = "password")
+    @Column
     private String password;
 
     public static Member saveToEntity(MemberSignUpRequest memberSignUpRequest) {

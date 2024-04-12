@@ -1,10 +1,10 @@
 spring:
   application:
     name: introme
-  autoconfigure:
-    exclude:
-      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
-      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+#  autoconfigure:
+#    exclude:
+#      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+#      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
