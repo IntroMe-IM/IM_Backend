@@ -13,7 +13,7 @@ public class MemberSignupService {
 
     private final MemberRepository memberRepository;
 
-    public void signUp2(MemberSignUpRequest memberSignUpRequest) {
+    public void signUp(MemberSignUpRequest memberSignUpRequest) {
         Member member = Member.saveToEntity(memberSignUpRequest);
         memberRepository.save(member);
     }
