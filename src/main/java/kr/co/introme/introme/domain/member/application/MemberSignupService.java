@@ -4,7 +4,6 @@ import kr.co.introme.introme.domain.member.domain.Member;
 import kr.co.introme.introme.domain.member.dto.MemberSignUpRequest;
 import kr.co.introme.introme.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
