@@ -21,26 +21,20 @@ import java.io.IOException;
 public class MemberApi {
 
     private final MemberSignupService memberSignupService;
-    private final MemberSigninService memberSigninService;  // SignIn 서비스 주입
+    private final MemberSigninService memberSigninService;
 
     @PostMapping("/signup")
-    public ResponseEntity<String> save(@Validated @RequestBody MemberSignUpRequest memberSignUpRequest){
+    public ResponseEntity<String> save(@Valid @RequestBody MemberSignUpRequest memberSignUpRequest) {
         memberSignupService.signUp(memberSignUpRequest);
         return ResponseEntity.ok("회원가입 완료!");
     }
 
     @PostMapping("/signin")
     public ResponseEntity<String> signIn(@Valid @RequestBody MemberSignInRequest memberSignInRequest) {
-        try {
-            boolean signInResult = memberSigninService.signIn(memberSignInRequest);
-            if (signInResult) {
-                return ResponseEntity.ok("로그인 성공!");
-            } else {
-                return ResponseEntity.badRequest().body("로그인 실패: 비밀번호 불일치");
-            }
-        } catch (Exception e) {
-            // 로그인 과정에서 예외 발생 시 처리
-            return ResponseEntity.status(500).body("서버 에러: " + e.getMessage());
+        if (memberSigninService.signIn(memberSignInRequest)) {
+            return ResponseEntity.ok("로그인 성공!");
+        } else {
+            return ResponseEntity.badRequest().body("로그인 실패: 비밀번호 불일치");
         }
     }
 }
