@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class TeamApi {
     private final TeamBuildService teamBuildService;
 
-//    @PostMapping("/build")
+    @PostMapping("/build")
+    public void build() {
 
+    }
 }

@@ -1,4 +1,8 @@
 package kr.co.introme.introme.domain.team.repository;
 
-public class TeamRepository {
+import kr.co.introme.introme.domain.team.domain.Team;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TeamRepository extends JpaRepository<Team, Long> {
+
 }

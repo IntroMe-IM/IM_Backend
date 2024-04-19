@@ -1,19 +1,18 @@
 package kr.co.introme.introme.domain.team.dto;
 
+
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
+
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 public class TeamBuildRequest {
-    private String name;
-    private String description;
 
-    public TeamBuildRequest(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
+    @NotBlank(message = "팀 이름은 필수 항목입니다.")
+    private String teamName;
 
-    public String getName() {
-        return name;
-    }
+    private String email;
 
-    public String getDescription() {
-        return description;
-    }
 }
