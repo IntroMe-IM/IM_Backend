@@ -11,8 +11,12 @@ import lombok.*;
 public class TeamBuildRequest {
 
     @NotBlank(message = "팀 이름은 필수 항목입니다.")
-    private String teamName;
+    private String name;
 
-    private String email;
+    private String project;
+
+    private String description;
+
+    private String image;
 
 }

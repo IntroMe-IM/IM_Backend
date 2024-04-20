@@ -16,7 +16,7 @@ public class MemberSigninService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public boolean signIn(MemberSignInRequest memberSignInRequest) {
+    public Member signIn(MemberSignInRequest memberSignInRequest) {
         Member member = memberRepository.findByEmail(memberSignInRequest.getEmail());
         if (member == null) {
             throw new MemberNotFoundException("회원 정보가 없습니다. 이메일을 확인해 주세요.");
@@ -26,6 +26,6 @@ public class MemberSigninService {
             throw new InvalidPasswordException("입력하신 비밀번호가 올바르지 않습니다.");
         }
 
-        return true;
+        return member;
     }
 }
