@@ -24,15 +24,15 @@ public class Team {
     private String name;
 
     //프로젝트 설명
-    @Column()
+    @Column(nullable = true)
     private String description;
 
     //프로젝트 이름
-    @Column
+    @Column(nullable = false)
     private String project;
 
     //이미지 경로
-    @Column
+    @Column(nullable = true)
     private String image;
 
     //팀 repo
