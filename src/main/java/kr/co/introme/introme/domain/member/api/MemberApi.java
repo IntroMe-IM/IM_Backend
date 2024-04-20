@@ -5,7 +5,6 @@ import kr.co.introme.introme.domain.member.application.MemberSigninService;
 import kr.co.introme.introme.domain.member.application.MemberSignupService;
 import kr.co.introme.introme.domain.member.dto.MemberSignInRequest;
 import kr.co.introme.introme.domain.member.dto.MemberSignUpRequest;
-import kr.co.introme.introme.domain.member.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -29,12 +28,12 @@ public class MemberApi {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<Member> signIn(@Valid @RequestBody MemberSignInRequest memberSignInRequest) {
+    public ResponseEntity<?> signIn(@Valid @RequestBody MemberSignInRequest memberSignInRequest) {
         try {
-            Member member = memberSigninService.signIn(memberSignInRequest);
-            return ResponseEntity.ok(member);
+            String jwtToken = memberSigninService.signIn(memberSignInRequest);
+            return ResponseEntity.ok().header("Authorization", "Bearer " + jwtToken).body("로그인 성공!");
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build(); // 상세한 에러 메시지나 유형에 따라 다르게 처리할 수 있습니다.
+            return ResponseEntity.badRequest().body("로그인 실패: " + e.getMessage());
         }
     }
 }
