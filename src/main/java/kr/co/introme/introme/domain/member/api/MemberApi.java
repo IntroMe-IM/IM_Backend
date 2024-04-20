@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-
 @RestController
 @RequestMapping("/v1/member")
 @RequiredArgsConstructor
@@ -30,11 +28,12 @@ public class MemberApi {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<String> signIn(@Valid @RequestBody MemberSignInRequest memberSignInRequest) {
-        if (memberSigninService.signIn(memberSignInRequest)) {
-            return ResponseEntity.ok("로그인 성공!");
-        } else {
-            return ResponseEntity.badRequest().body("로그인 실패: 비밀번호 불일치");
+    public ResponseEntity<?> signIn(@Valid @RequestBody MemberSignInRequest memberSignInRequest) {
+        try {
+            String jwtToken = memberSigninService.signIn(memberSignInRequest);
+            return ResponseEntity.ok().header("Authorization", "Bearer " + jwtToken).body("로그인 성공!");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("로그인 실패: " + e.getMessage());
         }
     }
 }
