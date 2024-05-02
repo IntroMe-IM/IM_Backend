@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 @Service
 @NoArgsConstructor
 public class ContributionService {
-    private final ContributionRepository contributionRepository;
+//    private final ContributionRepository contributionRepository;
 
 
 }
