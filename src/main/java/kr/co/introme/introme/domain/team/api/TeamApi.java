@@ -15,7 +15,7 @@ public class TeamApi {
 
     }
 
-
+    //test
     @GetMapping("/invite/@{code}")
     public String invite(@PathVariable String code) {
         return "null";

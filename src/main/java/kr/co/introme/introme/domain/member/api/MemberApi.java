@@ -23,6 +23,7 @@ public class MemberApi {
 
     @PostMapping("/signup")
     public ResponseEntity<String> save(@Valid @RequestBody MemberSignUpRequest memberSignUpRequest) {
+        System.out.println("memberSignUpRequest = " + memberSignUpRequest.toString());
         memberSignupService.signUp(memberSignUpRequest);
         return ResponseEntity.ok("회원가입 완료!");
     }
