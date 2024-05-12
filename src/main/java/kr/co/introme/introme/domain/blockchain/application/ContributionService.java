@@ -1,13 +1,14 @@
 package kr.co.introme.introme.domain.blockchain.application;
 
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-//@Service
-//@NoArgsConstructor
-//public class ContributionService {
-//    private final ContributionRepository contributionRepository;
-//
-//
-//}
-//
+@Service
+@RequiredArgsConstructor
+public class ContributionService {
+    //private final ContributionRepository contributionRepository;
+
+
+}
+
