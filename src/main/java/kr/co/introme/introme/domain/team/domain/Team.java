@@ -1,12 +1,17 @@
 package kr.co.introme.introme.domain.team.domain;
 
 import jakarta.persistence.*;
+import kr.co.introme.introme.domain.member.domain.Member;
 import kr.co.introme.introme.domain.team.dto.TeamBuildRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -42,11 +47,28 @@ public class Team {
     //생성 날짜
     @Column
     @Temporal(TemporalType.DATE)
+    @CreationTimestamp
     private Date createdDate;
 
     //fk
     @Column
     private Long ownerId;
 
+    @ManyToMany(mappedBy = "teams", cascade = CascadeType.PERSIST)
+    private Set<Member> members = new HashSet<>();
 
+
+    public static Team saveToEntity(TeamBuildRequest teamBuildRequest) {
+        Team team = new Team();
+        team.setName(teamBuildRequest.getName());
+        team.setDescription(teamBuildRequest.getDescription());
+        team.setImage(teamBuildRequest.getImage());
+        team.setProject(teamBuildRequest.getProject());
+        return team;
+    }
+
+    public void addMember(Member member) {
+        members.add(member); // Team에 Member 추가
+        member.getTeams().add(this); // Member에도 Team 추가
+    }
 }

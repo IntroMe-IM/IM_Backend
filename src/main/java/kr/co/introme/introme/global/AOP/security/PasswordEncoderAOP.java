@@ -1,6 +1,7 @@
 package kr.co.introme.introme.global.AOP.security;
 
 import kr.co.introme.introme.domain.member.domain.Member;
+import kr.co.introme.introme.domain.member.dto.MemberSignUpRequest;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -18,7 +19,7 @@ public class PasswordEncoderAOP {
     @Before("execution(* kr.co.introme.introme.domain.member.api.MemberApi.*(..))")
     public void encPwd(JoinPoint jp) throws Exception {
         Object[] args = jp.getArgs();
-        Member member = (Member) args[0];
+        MemberSignUpRequest member = (MemberSignUpRequest) args[0];
         String passwordEnc = passwordEncoder.encode(member.getPassword());
         member.setPassword(passwordEnc);
     }
