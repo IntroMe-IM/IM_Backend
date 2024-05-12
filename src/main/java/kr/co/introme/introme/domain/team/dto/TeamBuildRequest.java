@@ -19,5 +19,4 @@ public class TeamBuildRequest {
 
     private String image;
 
-    private Long owner;
 }

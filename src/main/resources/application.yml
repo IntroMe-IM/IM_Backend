@@ -1,17 +1,20 @@
 spring:
   application:
     name: introme
+#  autoconfigure:
+#    exclude:
+#      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+#      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
 
   # database 연동
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/introme_dev?serverTimezone=UTC&useSSL=false&characterEncoding=utf-8
-    url: jdbc:mysql://mysql:3306/introme_dev?serverTimezone=UTC&useSSL=false&characterEncoding=utf-8&allowPublicKeyRetrieval=true
-    username: inlee
-    password: 2580
+    driver-class-name: ${DB_DRIVER}
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
   # spring data jpa 설정
   jpa:
@@ -23,5 +26,5 @@ spring:
     database-platform: org.hibernate.dialect.MySQLDialect
 
 jwt:
-  secret: introme_jwt_secret # JWT를 서명하는데 사용되는 비밀키
-  expiration: 31449600000 # JWT의 만료 2시간 (밀리초 단위), 예: 604800000 밀리초는 1주일
+  secret: ${JWT_SECRET} # JWT를 서명하는데 사용되는 비밀키
+  expiration: 31449600000      # JWT의 만료 시간 (밀리초 단위), 예: 604800000 밀리초는 1주일
