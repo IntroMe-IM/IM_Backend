@@ -26,5 +26,5 @@ spring:
     database-platform: org.hibernate.dialect.MySQLDialect
 
 jwt:
-  secret: ${JWT_SECRET} # JWT를 서명하는데 사용되는 비밀키
+  secret: introme_jwt_secret # JWT를 서명하는데 사용되는 비밀키
   expiration: 31449600000      # JWT의 만료 시간 (밀리초 단위), 예: 604800000 밀리초는 1주일
