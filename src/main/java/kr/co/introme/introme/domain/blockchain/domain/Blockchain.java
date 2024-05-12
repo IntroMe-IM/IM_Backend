@@ -11,5 +11,4 @@ public class Blockchain {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
 }

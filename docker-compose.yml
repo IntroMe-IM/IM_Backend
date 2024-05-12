@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  spring-boot-app:
+    build: .
+    ports:
+      - "8081:8080"
+    depends_on:
+      - mysql
+    environment:
+      JWT_SECRET: introme_jwt_secret
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: introme_dev
+      MYSQL_USER: inlee
+      MYSQL_PASSWORD: 2580
+      MYSQL_ROOT_PASSWORD: 2580
+    ports:
+      - "3307:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:

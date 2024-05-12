@@ -16,7 +16,7 @@ public class PasswordEncoderAOP {
 
     private final PasswordEncoder passwordEncoder;
 
-    @Before("execution(* kr.co.introme.introme.domain.member.api.MemberApi.*(..))")
+    @Before("execution(* kr.co.introme.introme.domain.member.api.MemberApi.save(..))")
     public void encPwd(JoinPoint jp) throws Exception {
         Object[] args = jp.getArgs();
         MemberSignUpRequest member = (MemberSignUpRequest) args[0];

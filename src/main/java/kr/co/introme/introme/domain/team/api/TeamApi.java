@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v1/team")
 @RequiredArgsConstructor
 public class TeamApi {
-    private final TeamBuildService teamBuildService;
+//    private final TeamBuildService teamBuildService;
 
     @PostMapping("/build")
     public ResponseEntity<String> build(@RequestBody TeamBuildRequest teamBuildRequest) {

@@ -17,7 +17,7 @@ public class MemberSignupService {
     public void signUp(MemberSignUpRequest memberSignUpRequest) {
         // 비밀번호 암호화
         //String encodedPassword = passwordEncoder.encode(memberSignUpRequest.getPassword());
-        System.out.println("memberSignUpRequest = " + memberSignUpRequest.toString());
+//        System.out.println("memberSignUpRequest = " + memberSignUpRequest.toString());
         // 암호화된 비밀번호를 포함한 Member 엔티티 생성
         Member member = Member.saveToEntity(memberSignUpRequest);
         //member.setPassword(encodedPassword); // 암호화된 비밀번호 설정
