@@ -2,17 +2,19 @@ package kr.co.introme.introme.domain.member.domain;
 
 import jakarta.persistence.*;
 import kr.co.introme.introme.domain.member.dto.MemberSignUpRequest;
+import kr.co.introme.introme.domain.team.domain.Team;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "member")
-@ToString
 @NoArgsConstructor
 public class Member {
     @Id
@@ -41,6 +43,12 @@ public class Member {
     @Column(nullable = false)
     private String password;
 
+
+    @ManyToMany
+    @JoinTable(name = "team_member",
+            joinColumns = @JoinColumn(name = "member_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id"))
+    private Set<Team> teams = new HashSet<>();
 
     public static Member saveToEntity(MemberSignUpRequest memberSignUpRequest) {
         Member member = new Member();
