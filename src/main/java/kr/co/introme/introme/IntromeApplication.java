@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 public class IntromeApplication {
 
 	public static void main(String[] args) {
-		// 애플리케이션 실행
 		SpringApplication.run(IntromeApplication.class, args);
 	}
 }
