@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.co.introme.introme.IntromeApplicationTests" tests="1" skipped="1" failures="0" errors="0" timestamp="2024-05-12T10:01:42" hostname="iinhos-MacBook-Air.local" time="0.0">
+  <properties/>
+  <testcase name="contextLoads()" classname="kr.co.introme.introme.IntromeApplicationTests" time="0.0">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[19:01:39.643 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [kr.co.introme.introme.IntromeApplicationTests]: IntromeApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:01:39.692 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration kr.co.introme.introme.IntromeApplication for test class kr.co.introme.introme.IntromeApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.4)
+
+2024-05-12T19:01:39.885+09:00  INFO 2903 --- [introme] [    Test worker] k.c.i.introme.IntromeApplicationTests    : Starting IntromeApplicationTests using Java 20.0.1 with PID 2903 (started by inlee in /Users/inlee/Desktop/workspace/introme)
+2024-05-12T19:01:39.887+09:00  INFO 2903 --- [introme] [    Test worker] k.c.i.introme.IntromeApplicationTests    : No active profile set, falling back to 1 default profile: "default"
+2024-05-12T19:01:40.239+09:00  INFO 2903 --- [introme] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-05-12T19:01:40.267+09:00  INFO 2903 --- [introme] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 25 ms. Found 2 JPA repository interfaces.
+2024-05-12T19:01:40.525+09:00  INFO 2903 --- [introme] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-12T19:01:40.546+09:00  INFO 2903 --- [introme] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2024-05-12T19:01:40.559+09:00  INFO 2903 --- [introme] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-05-12T19:01:40.652+09:00  INFO 2903 --- [introme] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-05-12T19:01:40.664+09:00  INFO 2903 --- [introme] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-05-12T19:01:40.797+09:00  INFO 2903 --- [introme] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5f3ddc86
+2024-05-12T19:01:40.798+09:00  INFO 2903 --- [introme] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-05-12T19:01:40.814+09:00  WARN 2903 --- [introme] [    Test worker] o.h.e.j.e.i.JdbcEnvironmentInitiator     : HHH000339: Could not obtain connection metadata: java.sql.SQLSyntaxErrorException: Unknown column 'RESERVED' in 'where clause'
+2024-05-12T19:01:40.820+09:00  WARN 2903 --- [introme] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-05-12T19:01:41.204+09:00  INFO 2903 --- [introme] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: drop table if exists blockchain
+Hibernate: drop table if exists blockchain_seq
+Hibernate: drop table if exists member
+Hibernate: drop table if exists team
+Hibernate: create table blockchain (id bigint not null, primary key (id)) engine=InnoDB
+Hibernate: create table blockchain_seq (next_val bigint) engine=InnoDB
+Hibernate: insert into blockchain_seq values ( 1 )
+Hibernate: create table member (birthday date, id bigint not null auto_increment, email varchar(255) not null, name varchar(255) not null, organization varchar(255), password varchar(255) not null, phone_number varchar(255) not null, url varchar(255), primary key (id)) engine=InnoDB
+Hibernate: create table team (created_date date, id bigint not null auto_increment, owner_id bigint, description varchar(255), image varchar(255), name varchar(255) not null, project varchar(255) not null, url varchar(255), primary key (id)) engine=InnoDB
+2024-05-12T19:01:41.462+09:00  INFO 2903 --- [introme] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-12T19:01:42.006+09:00  INFO 2903 --- [introme] [    Test worker] k.c.i.introme.IntromeApplicationTests    : Started IntromeApplicationTests in 2.237 seconds (process running for 2.737)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
