@@ -9,7 +9,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -48,7 +48,11 @@ public class Team {
     @Column
     @Temporal(TemporalType.DATE)
     @CreationTimestamp
-    private Date createdDate;
+    private LocalDate createdDate;
+
+    //종료 날짜
+    @Column
+    private LocalDate terminateDate;
 
     //fk
     @Column
