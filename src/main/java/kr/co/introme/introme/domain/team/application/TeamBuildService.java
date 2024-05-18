@@ -10,7 +10,9 @@ import kr.co.introme.introme.domain.team.repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 @Service
@@ -35,7 +37,10 @@ public class TeamBuildService {
         // Create Team
         Team team = Team.saveToEntity(teamBuildRequest);
         team.setOwnerId(userId);
-        team.setUrl("localhost:8080/invite/" + userId);
+
+        // Generate team URL using hash
+        String hashUrl = generateHashUrl(team.getId(), userId);
+        team.setUrl(hashUrl);
 
         // Team save
         teamRepository.save(team);
@@ -47,5 +52,22 @@ public class TeamBuildService {
         teamRepository.save(team);
     }
 
-
+    private String generateHashUrl(Long teamId, Long ownerId) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            String text = teamId + ":" + ownerId;
+            byte[] hash = digest.digest(text.getBytes(StandardCharsets.UTF_8));
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error generating hash URL", e);
+        }
+    }
 }

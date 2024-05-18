@@ -1,8 +1,11 @@
 package kr.co.introme.introme.domain.member.application;
 
+import jakarta.transaction.Transactional;
 import kr.co.introme.introme.domain.card.domain.Card;
+import kr.co.introme.introme.domain.card.dto.CardDTO;
 import kr.co.introme.introme.domain.card.repository.CardRepository;
 import kr.co.introme.introme.domain.member.domain.Member;
+import kr.co.introme.introme.domain.member.dto.MemberSignUpRequest;
 import kr.co.introme.introme.domain.member.repository.MemberRepository;
 import kr.co.introme.introme.domain.team.domain.Team;
 import kr.co.introme.introme.domain.team.repository.TeamRepository;
@@ -42,14 +45,26 @@ public class MemberService {
         return cardRepository.findBySharedWithId(memberId);
     }
 
-    public List<Card> getTeamMembersCards(Long teamId) {
+    @Transactional
+    public List<CardDTO> getTeamMembersCards(Long teamId) {
         Optional<Team> teamOptional = teamRepository.findById(teamId);
         if (teamOptional.isPresent()) {
             Team team = teamOptional.get();
             List<Long> memberIds = team.getMembers().stream().map(Member::getId).collect(Collectors.toList());
-            return cardRepository.findByOwnerIdIn(memberIds);
+            List<Card> cards = cardRepository.findByOwnerIdIn(memberIds);
+            return cards.stream()
+                    .map(card -> {
+                        CardDTO dto = new CardDTO();
+                        dto.setId(card.getId());
+                        dto.setName(card.getName());
+                        dto.setDescription(card.getDescription());
+                        dto.setOwnerName(card.getOwner().getName());
+                        return dto;
+                    })
+                    .collect(Collectors.toList());
         } else {
             throw new RuntimeException("Team not found");
         }
     }
+
 }

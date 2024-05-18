@@ -34,7 +34,7 @@ public class Member {
     private String url;
 
     @Column
-    @Temporal(TemporalType.DATE)  // JPA에서 날짜 타입을 명확히 지정
+    @Temporal(TemporalType.DATE)
     private Date birthday;
 
     @Column(nullable = false)
@@ -64,8 +64,6 @@ public class Member {
         member.setPhoneNumber(memberSignUpRequest.getPhoneNumber());
         member.setUrl(memberSignUpRequest.getUrl());
         member.setBirthday(memberSignUpRequest.getBirthday());
-        System.out.println("saveToEntity: " + member.toString());
         return member;
     }
-
 }
