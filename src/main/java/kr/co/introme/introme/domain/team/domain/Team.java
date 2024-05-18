@@ -75,4 +75,12 @@ public class Team {
         members.add(member); // Team에 Member 추가
         member.getTeams().add(this); // Member에도 Team 추가
     }
+
+    public boolean isOwner(Long id){
+        if(this.getOwnerId().equals(id)){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

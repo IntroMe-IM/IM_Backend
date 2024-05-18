@@ -8,8 +8,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class TeamInviteRequest {
-    private String teamName;
+    private Long team_id;
 
-    private String email;
-
+    private Long owner_id;
 }

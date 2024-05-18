@@ -1,9 +1,10 @@
 package kr.co.introme.introme.domain.team.api;
 
-import kr.co.introme.introme.domain.team.application.InviteTeamService;
+import kr.co.introme.introme.domain.team.application.TeamInviteService;
 import kr.co.introme.introme.domain.team.application.TeamBuildService;
 import kr.co.introme.introme.domain.team.application.TeamUpdateService;
 import kr.co.introme.introme.domain.team.dto.TeamBuildRequest;
+import kr.co.introme.introme.domain.team.dto.TeamInviteRequest;
 import kr.co.introme.introme.domain.team.dto.TeamTerminateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class TeamApi {
     private final TeamBuildService teamBuildService;
-    private final InviteTeamService inviteTeamService;
+    private final TeamInviteService teamInviteService;
     private final TeamUpdateService teamUpdateService;
 
     @PostMapping("/build")
@@ -26,8 +27,14 @@ public class TeamApi {
 
     @GetMapping("/invite/@{code}")
     public ResponseEntity<String> invite(@PathVariable String code) {
-        inviteTeamService.invite(code);
+        teamInviteService.invite(code);
         return ResponseEntity.ok("팀원 초대완료!");
+    }
+
+    @PostMapping("/invite")
+    public ResponseEntity<String> generateURL(@RequestBody TeamInviteRequest teamInviteRequest){
+        teamInviteService.generate(teamInviteRequest);
+        return ResponseEntity.ok("팀원 초대 URL생성 완료!");
     }
 
     @PostMapping("/terminate")

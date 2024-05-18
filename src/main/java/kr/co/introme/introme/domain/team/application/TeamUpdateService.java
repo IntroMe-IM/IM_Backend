@@ -19,7 +19,7 @@ public class TeamUpdateService {
         //Find Team
         Team team = teamRepository.findById(teamTerminateRequest.getTeamId()).get();
         //Change Only The TeamLeader
-        if(team.getOwnerId().equals(teamTerminateRequest.getOwnerId())){
+        if(team.isOwner(teamTerminateRequest.getOwnerId())){
             //Check Already Terminated
             if(null == team.getTerminateDate()) {
                 //Stamped
