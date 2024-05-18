@@ -27,9 +27,6 @@ public class Member {
     @Column(nullable = false)
     private String name;
 
-    @Column
-    private String organization;
-
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
@@ -43,6 +40,14 @@ public class Member {
     @Column(nullable = false)
     private String password;
 
+    @Column
+    private int age;
+
+    @Column
+    private String mbti;
+
+    @Column
+    private String organization;
 
     @ManyToMany
     @JoinTable(name = "team_member",
