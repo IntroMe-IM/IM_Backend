@@ -1,7 +1,7 @@
 package kr.co.introme.introme.domain.team.api;
 
-import kr.co.introme.introme.domain.team.application.InviteTeamService;
 import kr.co.introme.introme.domain.team.application.TeamBuildService;
+import kr.co.introme.introme.domain.team.application.TeamInviteService;
 import kr.co.introme.introme.domain.team.application.TeamUpdateService;
 import kr.co.introme.introme.domain.team.dto.TeamBuildRequest;
 import kr.co.introme.introme.domain.team.dto.TeamTerminateRequest;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class TeamApi {
     private final TeamBuildService teamBuildService;
-    private final InviteTeamService inviteTeamService;
+    private final TeamInviteService inviteTeamService;
     private final TeamUpdateService teamUpdateService;
 
     @PostMapping("/build")
