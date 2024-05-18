@@ -9,5 +9,6 @@ import java.util.List;
 
 @Repository
 public interface CardRepository extends JpaRepository<Card, Long> {
-    List<Card> findByMemberIdNot(Long memberId);
+    List<Card> findByOwnerId(Long ownerId);
+    List<Card> findBySharedWithId(Long sharedWithId);
 }

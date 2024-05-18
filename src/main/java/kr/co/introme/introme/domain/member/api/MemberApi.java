@@ -9,6 +9,7 @@ import kr.co.introme.introme.domain.member.application.MemberService;
 import kr.co.introme.introme.domain.member.domain.Member;
 import kr.co.introme.introme.domain.member.dto.MemberSignInRequest;
 import kr.co.introme.introme.domain.member.dto.MemberSignUpRequest;
+import kr.co.introme.introme.domain.card.domain.Card;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -49,5 +50,19 @@ public class MemberApi {
     public ResponseEntity<List<Member>> getOtherMembers(@PathVariable Long memberId) {
         List<Member> otherMembers = memberService.getOtherMembers(memberId);
         return ResponseEntity.ok(otherMembers);
+    }
+
+    @Operation(summary = "명함 공유", description = "명함을 다른 회원과 공유합니다.")
+    @PostMapping("/share/{ownerId}/{sharedWithId}")
+    public ResponseEntity<String> shareCard(@PathVariable Long ownerId, @PathVariable Long sharedWithId) {
+        memberService.shareCard(ownerId, sharedWithId);
+        return ResponseEntity.ok("명함 공유 완료!");
+    }
+
+    @Operation(summary = "공유 받은 명함 조회", description = "공유 받은 명함을 조회합니다.")
+    @GetMapping("/shared-cards/{memberId}")
+    public ResponseEntity<List<Card>> getSharedCards(@PathVariable Long memberId) {
+        List<Card> sharedCards = memberService.getSharedCards(memberId);
+        return ResponseEntity.ok(sharedCards);
     }
 }
