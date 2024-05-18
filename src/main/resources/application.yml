@@ -27,3 +27,6 @@ spring:
 jwt:
   secret: introme_jwt_secret # JWT를 서명하는데 사용되는 비밀키
   expiration: 31449600000 # JWT의 만료 2시간 (밀리초 단위), 예: 604800000 밀리초는 1주일
+
+server:
+  forward-headers-strategy: FRAMEWORK
