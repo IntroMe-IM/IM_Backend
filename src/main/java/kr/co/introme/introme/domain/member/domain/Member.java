@@ -57,7 +57,7 @@ public class Member {
             inverseJoinColumns = @JoinColumn(name = "team_id"))
     private Set<Team> teams = new HashSet<>();
 
-    @OneToMany(mappedBy = "authorId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Board> boards;
 
     public static Member saveToEntity(MemberSignUpRequest memberSignUpRequest) {
