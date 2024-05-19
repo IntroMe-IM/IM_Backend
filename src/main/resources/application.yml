@@ -30,3 +30,16 @@ jwt:
 
 server:
   forward-headers-strategy: FRAMEWORK
+
+# CORS configuration
+cors:
+  allowed-origins: "https://introme.co.kr"
+  allowed-methods: "GET,POST,PUT,DELETE,OPTIONS"
+  allowed-headers: "*"
+  allow-credentials: true
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
