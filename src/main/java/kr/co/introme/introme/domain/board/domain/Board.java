@@ -34,7 +34,7 @@ public class Board {
     private LocalDate updateAt;
 
     @Column
-    private Integer hit;
+    private Integer hit = 0;
 
     @Column
     private String img_url;
