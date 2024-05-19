@@ -1,6 +1,7 @@
 package kr.co.introme.introme.domain.member.domain;
 
 import jakarta.persistence.*;
+import kr.co.introme.introme.domain.board.domain.Board;
 import kr.co.introme.introme.domain.member.dto.MemberSignUpRequest;
 import kr.co.introme.introme.domain.team.domain.Team;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import lombok.Setter;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -54,6 +56,9 @@ public class Member {
             joinColumns = @JoinColumn(name = "member_id"),
             inverseJoinColumns = @JoinColumn(name = "team_id"))
     private Set<Team> teams = new HashSet<>();
+
+    @OneToMany(mappedBy = "authorId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Board> boards;
 
     public static Member saveToEntity(MemberSignUpRequest memberSignUpRequest) {
         Member member = new Member();
