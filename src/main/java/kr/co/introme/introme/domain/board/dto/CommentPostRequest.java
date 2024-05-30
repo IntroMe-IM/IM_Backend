@@ -1,6 +1,6 @@
 package kr.co.introme.introme.domain.board.dto;
 
-
+import kr.co.introme.introme.domain.board.domain.Board;
 import kr.co.introme.introme.domain.member.domain.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,11 +11,11 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class BoardPostRequest {
-    //작성자 id
-    private Member author;
-    //제목
-    private String title;
-    //내용
+public class CommentPostRequest {
+    //댓글
     private String content;
+    //작성자
+    private Member author;
+    //연결된 게시판
+    private Board board;
 }
