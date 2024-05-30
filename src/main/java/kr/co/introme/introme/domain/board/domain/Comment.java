@@ -1,7 +1,6 @@
 package kr.co.introme.introme.domain.board.domain;
 
 import jakarta.persistence.*;
-import kr.co.introme.introme.domain.board.dto.BoardPostRequest;
 import kr.co.introme.introme.domain.member.domain.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,50 +8,33 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "board")
 @NoArgsConstructor
-public class Board {
+@Table(name = "comment")
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String title;
-
-    @Column
     private String content;
 
-    @Column
     @Temporal(TemporalType.DATE)
     @CreationTimestamp
+    @Column
     private LocalDate createAt;
 
     @Column
     private LocalDate updateAt;
 
-    @Column
-    private Integer hit = 0;
-
-    @Column
-    private String img_url;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", nullable = false)
     private Member author;
 
-    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments;
-
-    public static Board saveToEntity(BoardPostRequest boardPostRequest) {
-        Board board = new Board();
-        board.setAuthor(boardPostRequest.getAuthor());
-        board.setTitle(boardPostRequest.getTitle());
-        board.setContent(boardPostRequest.getContent());
-        return board;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id")
+    private Board board;
 }

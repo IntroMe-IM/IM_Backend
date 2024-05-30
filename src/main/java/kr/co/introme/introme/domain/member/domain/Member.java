@@ -2,6 +2,7 @@ package kr.co.introme.introme.domain.member.domain;
 
 import jakarta.persistence.*;
 import kr.co.introme.introme.domain.board.domain.Board;
+import kr.co.introme.introme.domain.board.domain.Comment;
 import kr.co.introme.introme.domain.member.dto.MemberSignUpRequest;
 import kr.co.introme.introme.domain.team.domain.Team;
 import lombok.Getter;
@@ -59,6 +60,9 @@ public class Member {
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Board> boards;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments;
 
     public static Member saveToEntity(MemberSignUpRequest memberSignUpRequest) {
         Member member = new Member();
