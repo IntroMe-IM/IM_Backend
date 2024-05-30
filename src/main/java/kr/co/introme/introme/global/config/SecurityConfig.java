@@ -39,7 +39,7 @@ public class SecurityConfig {
                         .anyRequest().permitAll()
                 )
                 .formLogin(formLogin -> formLogin.disable())  // 로그인 폼 비활성화
-                .httpBasic(withDefaults());  // HTTP Basic 인증 활성화 (원하는 경우)
+                .httpBasic(withDefaults());  // HTTP Basic 인증 활성화
 
         return http.build();
     }
