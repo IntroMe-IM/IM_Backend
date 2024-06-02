@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.002s</div>
+<div class="counter">0.007s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,7 +79,7 @@
 <a name="contextLoads()"></a>
 <h3 class="failures">contextLoads()</h3>
 <span class="code">
-<pre>java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@241abc2 testClass = kr.co.introme.introme.IntromeApplicationTests, locations = [], classes = [kr.co.introme.introme.IntromeApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceDescriptors = [], propertySourceProperties = [&quot;org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true&quot;], contextCustomizers = [org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@4eb386df, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5a18cd76, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@6995bf68, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@77d67cf3, org.springframework.boot.test.context.SpringBootTestAnnotation@ab4d7b07], resourceBasePath = &quot;src/main/webapp&quot;, contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
+<pre>java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@29ddaa8e testClass = kr.co.introme.introme.IntromeApplicationTests, locations = [], classes = [kr.co.introme.introme.IntromeApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceDescriptors = [], propertySourceProperties = [&quot;org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true&quot;], contextCustomizers = [org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@4eb386df, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5a18cd76, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@6995bf68, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@77d67cf3, org.springframework.boot.test.context.SpringBootTestAnnotation@ab4d7b07], resourceBasePath = &quot;src/main/webapp&quot;, contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:180)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:130)
 	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:191)
@@ -290,7 +290,7 @@ Caused by: java.net.UnknownHostException: mysql
 </thead>
 <tr>
 <td class="failures">contextLoads()</td>
-<td class="failures">0.002s</td>
+<td class="failures">0.007s</td>
 <td class="failures">failed</td>
 </tr>
 </table>
@@ -298,8 +298,8 @@ Caused by: java.net.UnknownHostException: mysql
 <div id="tab2" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>21:56:43.491 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [kr.co.introme.introme.IntromeApplicationTests]: IntromeApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-21:56:43.537 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration kr.co.introme.introme.IntromeApplication for test class kr.co.introme.introme.IntromeApplicationTests
+<pre>16:49:01.301 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [kr.co.introme.introme.IntromeApplicationTests]: IntromeApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+16:49:01.351 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration kr.co.introme.introme.IntromeApplication for test class kr.co.introme.introme.IntromeApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -309,16 +309,16 @@ Caused by: java.net.UnknownHostException: mysql
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.4)
 
-2024-05-27T21:56:43.728+09:00  INFO 47948 --- [introme] [    Test worker] k.c.i.introme.IntromeApplicationTests    : Starting IntromeApplicationTests using Java 20.0.1 with PID 47948 (started by inlee in /Users/inlee/Desktop/workspace/introme)
-2024-05-27T21:56:43.729+09:00  INFO 47948 --- [introme] [    Test worker] k.c.i.introme.IntromeApplicationTests    : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2024-05-27T21:56:44.097+09:00  INFO 47948 --- [introme] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-05-27T21:56:44.135+09:00  INFO 47948 --- [introme] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 33 ms. Found 4 JPA repository interfaces.
-2024-05-27T21:56:44.412+09:00  INFO 47948 --- [introme] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-05-27T21:56:44.433+09:00  INFO 47948 --- [introme] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
-2024-05-27T21:56:44.447+09:00  INFO 47948 --- [introme] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-05-27T21:56:44.545+09:00  INFO 47948 --- [introme] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-05-27T21:56:44.559+09:00  INFO 47948 --- [introme] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-05-27T21:56:45.621+09:00 ERROR 47948 --- [introme] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
+2024-06-02T16:49:01.529+09:00  INFO 25765 --- [introme] [    Test worker] k.c.i.introme.IntromeApplicationTests    : Starting IntromeApplicationTests using Java 20.0.1 with PID 25765 (started by inlee in /Users/inlee/Desktop/workspace/introme)
+2024-06-02T16:49:01.530+09:00  INFO 25765 --- [introme] [    Test worker] k.c.i.introme.IntromeApplicationTests    : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2024-06-02T16:49:01.864+09:00  INFO 25765 --- [introme] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-02T16:49:01.893+09:00  INFO 25765 --- [introme] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 26 ms. Found 5 JPA repository interfaces.
+2024-06-02T16:49:02.156+09:00  INFO 25765 --- [introme] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-02T16:49:02.175+09:00  INFO 25765 --- [introme] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2024-06-02T16:49:02.188+09:00  INFO 25765 --- [introme] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-06-02T16:49:02.281+09:00  INFO 25765 --- [introme] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-02T16:49:02.295+09:00  INFO 25765 --- [introme] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-02T16:49:04.508+09:00 ERROR 25765 --- [introme] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
 
 com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
 
@@ -491,7 +491,7 @@ Caused by: java.net.UnknownHostException: mysql: nodename nor servname provided,
 	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:62) ~[mysql-connector-j-8.3.0.jar:8.3.0]
 	... 141 common frames omitted
 
-2024-05-27T21:56:45.637+09:00  WARN 47948 --- [introme] [    Test worker] o.h.e.j.e.i.JdbcEnvironmentInitiator     : HHH000342: Could not obtain connection to query metadata
+2024-06-02T16:49:04.522+09:00  WARN 25765 --- [introme] [    Test worker] o.h.e.j.e.i.JdbcEnvironmentInitiator     : HHH000342: Could not obtain connection to query metadata
 
 java.lang.NullPointerException: Cannot invoke &quot;org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(java.sql.SQLException, String)&quot; because the return value of &quot;org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.sqlExceptionHelper()&quot; is null
 	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:116) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
@@ -621,11 +621,11 @@ java.lang.NullPointerException: Cannot invoke &quot;org.hibernate.engine.jdbc.sp
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 
-2024-05-27T21:56:45.652+09:00  WARN 47948 --- [introme] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2024-05-27T21:56:46.111+09:00  INFO 47948 --- [introme] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-Hibernate: alter table card drop foreign key FK8inky10unwdfjsml9b01lg2tu
-2024-05-27T21:56:46.117+09:00  INFO 47948 --- [introme] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-05-27T21:56:47.118+09:00 ERROR 47948 --- [introme] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
+2024-06-02T16:49:04.542+09:00  WARN 25765 --- [introme] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-06-02T16:49:05.003+09:00  INFO 25765 --- [introme] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: alter table board drop foreign key FKxyvgi1i91tvphpuqibk4kkdx
+2024-06-02T16:49:05.009+09:00  INFO 25765 --- [introme] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-02T16:49:06.015+09:00 ERROR 25765 --- [introme] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
 
 com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
 
@@ -801,20 +801,20 @@ Caused by: java.net.UnknownHostException: mysql
 	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:62) ~[mysql-connector-j-8.3.0.jar:8.3.0]
 	... 148 common frames omitted
 
-2024-05-27T21:56:47.127+09:00  WARN 47948 --- [introme] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 08S01
-2024-05-27T21:56:47.127+09:00 ERROR 47948 --- [introme] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Communications link failure
+2024-06-02T16:49:06.028+09:00  WARN 25765 --- [introme] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 08S01
+2024-06-02T16:49:06.028+09:00 ERROR 25765 --- [introme] [    Test worker] o.h.engine.jdbc.spi.SqlExceptionHelper   : Communications link failure
 
 The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
-2024-05-27T21:56:47.129+09:00 ERROR 47948 --- [introme] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Failed to initialize JPA EntityManagerFactory: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution [Communications link failure
+2024-06-02T16:49:06.030+09:00 ERROR 25765 --- [introme] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Failed to initialize JPA EntityManagerFactory: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution [Communications link failure
 
 The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.] [n/a]
-2024-05-27T21:56:47.130+09:00  WARN 47948 --- [introme] [    Test worker] o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution [Communications link failure
+2024-06-02T16:49:06.031+09:00  WARN 25765 --- [introme] [    Test worker] o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution [Communications link failure
 
 The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.] [n/a]
-2024-05-27T21:56:47.137+09:00  INFO 47948 --- [introme] [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+2024-06-02T16:49:06.043+09:00  INFO 25765 --- [introme] [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2024-05-27T21:56:47.146+09:00 ERROR 47948 --- [introme] [    Test worker] o.s.boot.SpringApplication               : Application run failed
+2024-06-02T16:49:06.053+09:00 ERROR 25765 --- [introme] [    Test worker] o.s.boot.SpringApplication               : Application run failed
 
 org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution [Communications link failure
 
@@ -1009,9 +1009,9 @@ Caused by: java.net.UnknownHostException: mysql
 	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:62) ~[mysql-connector-j-8.3.0.jar:8.3.0]
 	... 148 common frames omitted
 
-2024-05-27T21:56:47.151+09:00  WARN 47948 --- [introme] [    Test worker] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener] to prepare test instance [kr.co.introme.introme.IntromeApplicationTests@7e5e7753]
+2024-06-02T16:49:06.062+09:00  WARN 25765 --- [introme] [    Test worker] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener] to prepare test instance [kr.co.introme.introme.IntromeApplicationTests@4c678a1f]
 
-java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@241abc2 testClass = kr.co.introme.introme.IntromeApplicationTests, locations = [], classes = [kr.co.introme.introme.IntromeApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceDescriptors = [], propertySourceProperties = [&quot;org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true&quot;], contextCustomizers = [org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@4eb386df, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5a18cd76, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@6995bf68, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@77d67cf3, org.springframework.boot.test.context.SpringBootTestAnnotation@ab4d7b07], resourceBasePath = &quot;src/main/webapp&quot;, contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
+java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@29ddaa8e testClass = kr.co.introme.introme.IntromeApplicationTests, locations = [], classes = [kr.co.introme.introme.IntromeApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceDescriptors = [], propertySourceProperties = [&quot;org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true&quot;], contextCustomizers = [org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@4eb386df, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5a18cd76, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@6995bf68, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@77d67cf3, org.springframework.boot.test.context.SpringBootTestAnnotation@ab4d7b07], resourceBasePath = &quot;src/main/webapp&quot;, contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:180) ~[spring-test-6.1.5.jar:6.1.5]
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:130) ~[spring-test-6.1.5.jar:6.1.5]
 	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:191) ~[spring-test-6.1.5.jar:6.1.5]
@@ -1257,7 +1257,7 @@ Unconditional classes:
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.7</a> at 2024. 5. 27. 오후 9:56:47</p>
+<a href="http://www.gradle.org">Gradle 8.7</a> at 2024. 6. 2. 오후 4:49:06</p>
 </div>
 </div>
 </body>

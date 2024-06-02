@@ -29,4 +29,8 @@ public class Card {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shared_with_id")
     private Member sharedWith;
+
+    // 카드가 공유되었는지 여부를 나타내는 플래그 추가
+    @Column(nullable = false)
+    private boolean isShared = false;
 }

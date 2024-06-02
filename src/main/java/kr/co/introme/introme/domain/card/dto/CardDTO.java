@@ -14,12 +14,14 @@ public class CardDTO {
     private Long id;
     private String name;
     private String description;
-    private String ownerName;  // Owner의 이름 추가
+    private String ownerName;
+    private boolean isShared;
 
     public CardDTO(Card card) {
         this.id = card.getId();
         this.name = card.getName();
         this.description = card.getDescription();
-        this.ownerName = card.getOwner().getName();  // Owner의 이름 설정
+        this.ownerName = card.getOwner().getName();
+        this.isShared = card.isShared();
     }
 }

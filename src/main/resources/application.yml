@@ -8,8 +8,8 @@ spring:
   # database 연동
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/introme_dev?serverTimezone=UTC&useSSL=false&characterEncoding=utf-8
-    url: jdbc:mysql://mysql:3306/introme_dev?serverTimezone=UTC&useSSL=false&characterEncoding=utf-8&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/introme_dev?serverTimezone=UTC&useSSL=false&characterEncoding=utf-8
+#    url: jdbc:mysql://mysql:3306/introme_dev?serverTimezone=UTC&useSSL=false&characterEncoding=utf-8&allowPublicKeyRetrieval=true
 
 
     username: inlee

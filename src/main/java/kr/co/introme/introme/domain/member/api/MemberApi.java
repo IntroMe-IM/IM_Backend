@@ -9,13 +9,13 @@ import kr.co.introme.introme.domain.member.application.MemberService;
 import kr.co.introme.introme.domain.member.domain.Member;
 import kr.co.introme.introme.domain.member.dto.MemberSignInRequest;
 import kr.co.introme.introme.domain.member.dto.MemberSignUpRequest;
-import kr.co.introme.introme.domain.card.domain.Card;
+import kr.co.introme.introme.domain.card.dto.CardDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @Tag(name = "회원 API", description = "회원 가입, 로그인 API")
@@ -61,8 +61,8 @@ public class MemberApi {
 
     @Operation(summary = "공유 받은 명함 조회", description = "공유 받은 명함을 조회합니다.")
     @GetMapping("/shared-cards/{memberId}")
-    public ResponseEntity<List<Card>> getSharedCards(@PathVariable Long memberId) {
-        List<Card> sharedCards = memberService.getSharedCards(memberId);
+    public ResponseEntity<List<CardDTO>> getSharedCards(@PathVariable Long memberId) {
+        List<CardDTO> sharedCards = memberService.getSharedCards(memberId);
         return ResponseEntity.ok(sharedCards);
     }
 }
