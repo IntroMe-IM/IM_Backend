@@ -26,6 +26,7 @@ public class BoardApi {
 
     }
 
+    @Operation(summary = "게시글 조회수", description = "조휘수를 카운팅합니다.")
     @GetMapping("/{board_id}")
     public ResponseEntity<String> hit(@PathVariable Long board_id){
         String allHit = boardPostService.hit(board_id);
