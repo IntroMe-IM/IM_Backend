@@ -2,10 +2,8 @@ package kr.co.introme.introme.domain.member.application;
 
 import jakarta.transaction.Transactional;
 import kr.co.introme.introme.domain.card.domain.Card;
-import kr.co.introme.introme.domain.card.domain.SharedCard;
 import kr.co.introme.introme.domain.card.dto.CardDTO;
 import kr.co.introme.introme.domain.card.repository.CardRepository;
-import kr.co.introme.introme.domain.card.repository.SharedCardRepository;
 import kr.co.introme.introme.domain.member.domain.Member;
 import kr.co.introme.introme.domain.member.repository.MemberRepository;
 import kr.co.introme.introme.domain.team.domain.Team;
@@ -22,7 +20,6 @@ import java.util.stream.Collectors;
 public class MemberService {
     private final MemberRepository memberRepository;
     private final CardRepository cardRepository;
-    private final SharedCardRepository sharedCardRepository;
     private final TeamRepository teamRepository;
 
     public List<Member> getOtherMembers(Long memberId) {
@@ -33,31 +30,7 @@ public class MemberService {
         Optional<Member> owner = memberRepository.findById(ownerId);
         Optional<Member> sharedWith = memberRepository.findById(sharedWithId);
 
-        if (owner.isPresent() && sharedWith.isPresent()) {
-            // 소유자의 명함 가져오기
-            List<Card> cards = cardRepository.findByOwnerId(ownerId);
-
-            if (cards.isEmpty()) {
-                throw new RuntimeException("공유할 명함이 없습니다.");
-            }
-
-            // 첫 번째 명함을 가져와서 공유함으로 설정
-            Card card = cards.get(0);
-            SharedCard sharedCard = new SharedCard();
-            sharedCard.setCard(card);
-            sharedCard.setSharedWith(sharedWith.get());
-            sharedCardRepository.save(sharedCard);
-        } else {
-            throw new RuntimeException("Member not found");
-        }
-    }
-
-    public List<CardDTO> getSharedCards(Long memberId) {
-        List<SharedCard> sharedCards = sharedCardRepository.findBySharedWithId(memberId);
-        return sharedCards.stream()
-                .map(sharedCard -> new CardDTO(sharedCard.getCard()))
-                .collect(Collectors.toList());
-    }
+       
 
     @Transactional
     public List<CardDTO> getTeamMembersCards(Long teamId) {
