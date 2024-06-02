@@ -2,6 +2,9 @@ package kr.co.introme.introme.domain.board.api;
 
 import io.swagger.v3.oas.annotations.Operation;
 import kr.co.introme.introme.domain.board.application.BoardPostService;
+import kr.co.introme.introme.domain.board.dto.BoardContentResponse;
+import kr.co.introme.introme.domain.board.dto.BoardPageRequest;
+import kr.co.introme.introme.domain.board.dto.BoardPageResponse;
 import kr.co.introme.introme.domain.board.dto.BoardPostRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -31,5 +34,11 @@ public class BoardApi {
     public ResponseEntity<String> hit(@PathVariable Long board_id){
         String allHit = boardPostService.hit(board_id);
         return ResponseEntity.ok("총 조회수 = " + allHit + ".");
+    }
+
+    @Operation(summary = "게시글 요청", description = "cursor를 이용해 무한 스크롤 방식의 게시판")
+    @PostMapping("/page")
+    public ResponseEntity<BoardPageResponse<BoardContentResponse>> getBoardPage(@RequestBody BoardPageRequest boardPageRequest){
+        return ResponseEntity.ok(boardPostService.getBoards(boardPageRequest.getPage(), boardPageRequest.getSize()));
     }
 }

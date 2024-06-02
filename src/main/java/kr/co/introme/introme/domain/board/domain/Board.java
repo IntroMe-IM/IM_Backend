@@ -39,7 +39,7 @@ public class Board {
     private Integer hit = 0;
 
     @Column
-    private String img_url;
+    private String imgUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", nullable = false)

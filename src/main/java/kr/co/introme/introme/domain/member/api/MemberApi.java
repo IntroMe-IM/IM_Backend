@@ -5,17 +5,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import kr.co.introme.introme.domain.member.application.MemberSigninService;
 import kr.co.introme.introme.domain.member.application.MemberSignupService;
-import kr.co.introme.introme.domain.member.application.MemberService;
 import kr.co.introme.introme.domain.member.domain.Member;
 import kr.co.introme.introme.domain.member.dto.MemberSignInRequest;
 import kr.co.introme.introme.domain.member.dto.MemberSignUpRequest;
-import kr.co.introme.introme.domain.card.dto.CardDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @Tag(name = "회원 API", description = "회원 가입, 로그인 API")
