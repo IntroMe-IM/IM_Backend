@@ -2,6 +2,7 @@ package kr.co.introme.introme.domain.board.application;
 
 import kr.co.introme.introme.domain.board.domain.Board;
 import kr.co.introme.introme.domain.board.domain.Comment;
+import kr.co.introme.introme.domain.board.dto.CommentContentResponse;
 import kr.co.introme.introme.domain.board.dto.CommentPostRequest;
 import kr.co.introme.introme.domain.board.repository.BoardRepository;
 import kr.co.introme.introme.domain.board.repository.CommentRepository;
@@ -9,6 +10,9 @@ import kr.co.introme.introme.domain.member.domain.Member;
 import kr.co.introme.introme.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,5 +31,18 @@ public class CommentPostService {
         } else {
             return "Can Not Found Member or Board";
         }
+    }
+
+    public List<CommentContentResponse> getComment(Long boardId){
+        List<Comment> commentList = commentRepository.findByBoardId(boardId);
+        List<CommentContentResponse> commentContent = commentList.stream().map(comment -> new CommentContentResponse(
+                comment.getId(),
+                comment.getContent(),
+                comment.getCreateAt(),
+                comment.getUpdateAt(),
+                comment.getAuthor().getId(),
+                comment.getBoard().getId()
+        )).collect(Collectors.toList());
+        return commentContent;
     }
 }
