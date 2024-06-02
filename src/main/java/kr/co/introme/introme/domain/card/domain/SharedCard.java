@@ -9,20 +9,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "card")
+@Table(name = "shared_card")
 @NoArgsConstructor
-public class Card {
+public class SharedCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
-    private String description;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "card_id", nullable = false)
+    private Card card;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id", nullable = false)
-    private Member owner;
+    @JoinColumn(name = "shared_with_id", nullable = false)
+    private Member sharedWith;
 }

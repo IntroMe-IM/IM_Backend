@@ -34,7 +34,6 @@ public class MemberSignupService {
         card.setOwner(member);
         card.setName(member.getName() + "'s Card");  // 기본 카드 이름 설정
         card.setDescription("Default description");  // 기본 설명 설정
-        card.setSharedWith(member);  // 임시로 owner와 동일하게 설정
         cardRepository.save(card);
     }
 }
