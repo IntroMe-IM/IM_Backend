@@ -1,7 +1,5 @@
 package kr.co.introme.introme.domain.board.dto;
 
-import kr.co.introme.introme.domain.board.domain.Board;
-import kr.co.introme.introme.domain.member.domain.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +13,7 @@ public class CommentPostRequest {
     //댓글
     private String content;
     //작성자
-    private Member author;
+    private Long author;
     //연결된 게시판
-    private Board board;
+    private Long board;
 }

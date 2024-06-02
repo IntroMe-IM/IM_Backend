@@ -48,9 +48,9 @@ public class Board {
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
 
-    public static Board saveToEntity(BoardPostRequest boardPostRequest) {
+    public static Board saveToEntity(BoardPostRequest boardPostRequest, Member member) {
         Board board = new Board();
-        board.setAuthor(boardPostRequest.getAuthor());
+        board.setAuthor(member);
         board.setTitle(boardPostRequest.getTitle());
         board.setContent(boardPostRequest.getContent());
         return board;

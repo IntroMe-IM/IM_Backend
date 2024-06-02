@@ -17,8 +17,13 @@ public class BoardApi {
     @Operation(summary = "게시글 작성", description = "게시글 작성 정보를 저장합니다.")
     @PostMapping("/")
     public ResponseEntity<String> post(@RequestBody BoardPostRequest boardPostRequest){
-        boardPostService.save(boardPostRequest);
-        return ResponseEntity.ok("작성완료!");
+        String result = boardPostService.save(boardPostRequest);
+        if (result.equals("ok")){
+            return ResponseEntity.ok("작성완료!");
+        } else {
+            return ResponseEntity.ok(result);
+        }
+
     }
 
     @GetMapping("/{board_id}")
