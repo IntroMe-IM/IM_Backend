@@ -2,27 +2,29 @@ package kr.co.introme.introme.domain.card.domain;
 
 import jakarta.persistence.*;
 import kr.co.introme.introme.domain.member.domain.Member;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
 @Getter
 @Setter
-@Entity
-@Table(name = "card")
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
+    @Column
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "owner_id", nullable = false)
     private Member owner;
+
+    @OneToMany(mappedBy = "card", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<SharedCard> sharedCards = new HashSet<>();
 }

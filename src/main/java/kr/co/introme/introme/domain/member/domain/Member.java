@@ -24,10 +24,10 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column
     private String email;
 
-    @Column(nullable = false)
+    @Column
     private String name;
 
     @Column(name = "phone_number", nullable = false)
@@ -71,7 +71,6 @@ public class Member {
         member.setName(memberSignUpRequest.getName());
         member.setOrganization(memberSignUpRequest.getOrganization());
         member.setPhoneNumber(memberSignUpRequest.getPhoneNumber());
-        member.setUrl(memberSignUpRequest.getUrl());
         member.setBirthday(memberSignUpRequest.getBirthday());
         return member;
     }

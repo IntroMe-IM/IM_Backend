@@ -44,9 +44,9 @@ public class TeamApi {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/cards/{teamId}")
-    public ResponseEntity<List<CardDTO>> getTeamMembersCards(@PathVariable Long teamId) {
-        List<CardDTO> cards = memberService.getTeamMembersCards(teamId);
-        return ResponseEntity.ok(cards);
-    }
+//    @GetMapping("/cards/{teamId}")
+//    public ResponseEntity<List<CardDTO>> getTeamMembersCards(@PathVariable Long teamId) {
+//        List<CardDTO> cards = memberService.getTeamMembersCards(teamId);
+//        return ResponseEntity.ok(cards);
+//    }
 }

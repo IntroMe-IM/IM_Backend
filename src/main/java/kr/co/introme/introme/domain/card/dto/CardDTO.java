@@ -1,6 +1,7 @@
 package kr.co.introme.introme.domain.card.dto;
 
 import kr.co.introme.introme.domain.card.domain.Card;
+import kr.co.introme.introme.domain.member.domain.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,13 +12,14 @@ import lombok.Setter;
 public class CardDTO {
     private Long id;
     private String name;
-    private String description;
-    private String ownerName;
+    private String phoneNumber;
+    private String company;
 
     public CardDTO(Card card) {
         this.id = card.getId();
-        this.name = card.getName();
-        this.description = card.getDescription();
-        this.ownerName = card.getOwner().getName();
+        Member owner = card.getOwner();
+        this.name = owner.getName();
+        this.phoneNumber = owner.getPhoneNumber();
+        this.company = owner.getOrganization();
     }
 }

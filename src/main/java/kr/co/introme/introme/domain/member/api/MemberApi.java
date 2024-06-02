@@ -52,17 +52,4 @@ public class MemberApi {
         return ResponseEntity.ok(otherMembers);
     }
 
-    @Operation(summary = "명함 공유", description = "명함을 다른 회원과 공유합니다.")
-    @PostMapping("/share/{ownerId}/{sharedWithId}")
-    public ResponseEntity<String> shareCard(@PathVariable Long ownerId, @PathVariable Long sharedWithId) {
-        memberService.shareCard(ownerId, sharedWithId);
-        return ResponseEntity.ok("명함 공유 완료!");
-    }
-
-    @Operation(summary = "공유 받은 명함 조회", description = "공유 받은 명함을 조회합니다.")
-    @GetMapping("/shared-cards/{memberId}")
-    public ResponseEntity<List<CardDTO>> getSharedCards(@PathVariable Long memberId) {
-        List<CardDTO> sharedCards = memberService.getSharedCards(memberId);
-        return ResponseEntity.ok(sharedCards);
-    }
 }

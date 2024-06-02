@@ -30,20 +30,5 @@ public class MemberService {
         Optional<Member> owner = memberRepository.findById(ownerId);
         Optional<Member> sharedWith = memberRepository.findById(sharedWithId);
 
-       
-
-    @Transactional
-    public List<CardDTO> getTeamMembersCards(Long teamId) {
-        Optional<Team> teamOptional = teamRepository.findById(teamId);
-        if (teamOptional.isPresent()) {
-            Team team = teamOptional.get();
-            List<Long> memberIds = team.getMembers().stream().map(Member::getId).collect(Collectors.toList());
-            List<Card> cards = cardRepository.findByOwnerIdIn(memberIds);
-            return cards.stream()
-                    .map(CardDTO::new)
-                    .collect(Collectors.toList());
-        } else {
-            throw new RuntimeException("Team not found");
-        }
     }
 }
