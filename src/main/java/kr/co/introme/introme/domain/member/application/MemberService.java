@@ -11,6 +11,8 @@ import kr.co.introme.introme.domain.member.repository.MemberRepository;
 import kr.co.introme.introme.domain.team.domain.Team;
 import kr.co.introme.introme.domain.team.repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +22,8 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class MemberService {
+    private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
+
     private final MemberRepository memberRepository;
     private final CardRepository cardRepository;
     private final SharedCardRepository sharedCardRepository;
@@ -53,10 +57,18 @@ public class MemberService {
     }
 
     public List<CardDTO> getSharedCards(Long memberId) {
-        List<SharedCard> sharedCards = sharedCardRepository.findBySharedWithId(memberId);
-        return sharedCards.stream()
-                .map(sharedCard -> new CardDTO(sharedCard.getCard()))
+        logger.info("Fetching shared cards for member ID: {}", memberId);
+        List<SharedCard> sharedCards = sharedCardRepository.findSharedCardsBySharedWithId(memberId);
+        logger.info("Number of shared cards found: {}", sharedCards.size());
+        List<CardDTO> cardDTOs = sharedCards.stream()
+                .map(sharedCard -> {
+                    Card card = sharedCard.getCard();
+                    logger.info("Converting card ID: {} owned by member ID: {}", card.getId(), card.getOwner().getId());
+                    return new CardDTO(card);
+                })
                 .collect(Collectors.toList());
+        logger.info("Number of card DTOs created: {}", cardDTOs.size());
+        return cardDTOs;
     }
 
     @Transactional
