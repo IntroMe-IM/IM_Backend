@@ -19,14 +19,14 @@ public class CardApi {
     private final CardService cardService;
 
     @Operation(summary = "명함 공유 URL 조회", description = "명함 공유를 위한 URL을 조회합니다.")
-    @GetMapping("/generate-share-url/{memberId}")
+    @GetMapping("/get-url/{memberId}")
     public ResponseEntity<String> getShareUrl(@PathVariable Long memberId) {
         String shareUrl = cardService.getShareUrl(memberId);
         return ResponseEntity.ok(shareUrl);
     }
 
     @Operation(summary = "명함 공유", description = "해싱된 URL을 통해 명함을 다른 회원과 공유합니다.")
-    @GetMapping("/{encodedData}")
+    @GetMapping("/shared-card/{encodedData}")
     public ResponseEntity<String> shareCard(@PathVariable String encodedData, @RequestParam Long sharedWithId) {
         cardService.shareCard(encodedData, sharedWithId);
         return ResponseEntity.ok("명함 공유 완료!");

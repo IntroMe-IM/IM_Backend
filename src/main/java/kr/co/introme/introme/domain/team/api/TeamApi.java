@@ -16,7 +16,6 @@ public class TeamApi {
     private final TeamBuildService teamBuildService;
     private final InviteTeamService inviteTeamService;
     private final TeamUpdateService teamUpdateService;
-    private final MemberService memberService;
 
     @PostMapping("/build")
     public ResponseEntity<String> build(@RequestBody TeamBuildRequest teamBuildRequest) {

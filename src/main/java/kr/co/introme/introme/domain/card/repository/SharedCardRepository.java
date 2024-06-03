@@ -8,6 +8,5 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface SharedCardRepository extends JpaRepository<SharedCard, Long> {
-    @Query("SELECT sc FROM SharedCard sc JOIN FETCH sc.card WHERE sc.sharedWith.id = :memberId")
-    List<SharedCard> findSharedCardsBySharedWithId(@Param("memberId") Long memberId);
+    List<SharedCard> findBySharedWithId(Long sharedWithId);
 }

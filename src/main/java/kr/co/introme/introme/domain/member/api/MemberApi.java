@@ -22,7 +22,6 @@ public class MemberApi {
 
     private final MemberSignupService memberSignupService;
     private final MemberSigninService memberSigninService;
-    private final MemberService memberService;
 
     @Operation(summary = "회원가입", description = "dto로 받은 회원가입 정보를 저장합니다.")
     @PostMapping("/signup")
@@ -40,13 +39,6 @@ public class MemberApi {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("로그인 실패: " + e.getMessage());
         }
-    }
-
-    @Operation(summary = "다른 회원 조회", description = "현재 로그인한 회원 외의 모든 회원을 조회합니다.")
-    @GetMapping("/others/{memberId}")
-    public ResponseEntity<List<Member>> getOtherMembers(@PathVariable Long memberId) {
-        List<Member> otherMembers = memberService.getOtherMembers(memberId);
-        return ResponseEntity.ok(otherMembers);
     }
 
 }
