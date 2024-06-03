@@ -5,14 +5,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import kr.co.introme.introme.domain.member.application.MemberSigninService;
 import kr.co.introme.introme.domain.member.application.MemberSignupService;
-import kr.co.introme.introme.domain.member.domain.Member;
 import kr.co.introme.introme.domain.member.dto.MemberSignInRequest;
 import kr.co.introme.introme.domain.member.dto.MemberSignUpRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Map;
 
 @RestController
 @Tag(name = "회원 API", description = "회원 가입, 로그인 API")
@@ -34,11 +33,10 @@ public class MemberApi {
     @PostMapping("/signin")
     public ResponseEntity<?> signIn(@Valid @RequestBody MemberSignInRequest memberSignInRequest) {
         try {
-            String jwtToken = memberSigninService.signIn(memberSignInRequest);
-            return ResponseEntity.ok().header("Authorization", "Bearer " + jwtToken).body("로그인 성공!");
+            Map<String, Object> response = memberSigninService.signIn(memberSignInRequest);
+            return ResponseEntity.ok().header("Authorization", "Bearer " + response.get("token")).body(response);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("로그인 실패: " + e.getMessage());
         }
     }
-
 }
