@@ -1,0 +1,7 @@
+# 자동 줄바꿈 변환 설정
+* text=auto
+
+# 특정 파일 형식에 대한 줄바꿈 형식 설정
+*.yml text eol=lf
+*.sh text eol=lf
+*.java text eol=lf

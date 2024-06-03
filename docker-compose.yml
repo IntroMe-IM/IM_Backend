@@ -8,6 +8,8 @@ services:
       - mysql
     environment:
       JWT_SECRET: introme_jwt_secret
+    volumes:
+      - ./src/main/resources/application-server.yml:/app/application-server.yml
   mysql:
     image: mysql:8.0
     environment:
