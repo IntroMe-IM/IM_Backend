@@ -1,8 +1,5 @@
 package kr.co.introme.introme.domain.team.api;
 
-import kr.co.introme.introme.domain.card.domain.Card;
-import kr.co.introme.introme.domain.card.dto.CardDTO;
-import kr.co.introme.introme.domain.member.application.MemberService;
 import kr.co.introme.introme.domain.team.application.InviteTeamService;
 import kr.co.introme.introme.domain.team.application.TeamBuildService;
 import kr.co.introme.introme.domain.team.application.TeamUpdateService;
@@ -11,8 +8,6 @@ import kr.co.introme.introme.domain.team.dto.TeamTerminateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/v1/team")

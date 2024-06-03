@@ -2,13 +2,16 @@ package kr.co.introme.introme.domain.board.api;
 
 import io.swagger.v3.oas.annotations.Operation;
 import kr.co.introme.introme.domain.board.application.CommentPostService;
-import kr.co.introme.introme.domain.board.dto.CommentPostRequest;
+import kr.co.introme.introme.domain.board.domain.Comment;
+import kr.co.introme.introme.domain.board.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/v1/comment")
@@ -25,5 +28,11 @@ public class CommentApi {
         } else {
             return ResponseEntity.ok(result);
         }
+    }
+
+    @Operation(summary = "댓글 요청", description = "댓글을 전부 가져오는 서비스")
+    @PostMapping("/comment")
+    public ResponseEntity<List<CommentContentResponse>> getBoardPage(@RequestBody Long boardId){
+        return ResponseEntity.ok(commentPostService.getComment(boardId));
     }
 }
