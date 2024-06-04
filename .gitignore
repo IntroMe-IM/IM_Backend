@@ -37,3 +37,6 @@ out/
 
 ### application.properties ###
 application.properties
+
+### build ###
+/build
