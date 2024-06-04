@@ -29,11 +29,12 @@ public class BoardApi {
 
     }
 
-    @Operation(summary = "게시글 조회수", description = "조휘수를 카운팅합니다.")
+    @Operation(summary = "게시글 상세", description = "게시글의 상세 정보를 표기하고 조회수를 카운팅합니다.")
     @GetMapping("/{board_id}")
-    public ResponseEntity<String> hit(@PathVariable Long board_id){
-        String allHit = boardPostService.hit(board_id);
-        return ResponseEntity.ok("총 조회수 = " + allHit + ".");
+    public ResponseEntity<BoardContentResponse> hit(@PathVariable Long board_id){
+        boardPostService.hit(board_id);
+        BoardContentResponse response = boardPostService.getOne(board_id);
+        return ResponseEntity.ok(response);
     }
 
     @Operation(summary = "게시글 요청", description = "cursor를 이용해 무한 스크롤 방식의 게시판")

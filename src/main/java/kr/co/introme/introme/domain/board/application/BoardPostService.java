@@ -34,27 +34,23 @@ public class BoardPostService {
         }
     }
 
-    public String hit(Long boardId) {
+    public void hit(Long boardId) {
         Board board = boardRepository.findById(boardId).get();
-
         Integer count = board.getHit() + 1;
         board.setHit(count);
         boardRepository.save(board);
-        return count.toString();
     }
 
     public BoardPageResponse<BoardContentResponse> getBoards(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Board> boardPage = boardRepository.findAll(pageable);
         List<BoardContentResponse> content = boardPage.getContent().stream()
-                .map(board -> new BoardContentResponse(
+                .map(board -> BoardContentResponse.boardLists(
                         board.getId(),
                         board.getTitle(),
-                        board.getContent(),
                         board.getCreateAt(),
                         board.getUpdateAt(),
                         board.getHit(),
-                        board.getImgUrl(),
                         board.getAuthor().getId()
                 )).collect(Collectors.toList());
         return new BoardPageResponse<>(
@@ -66,5 +62,10 @@ public class BoardPostService {
                 boardPage.isFirst(),
                 boardPage.isLast()
         );
+    }
+
+    public BoardContentResponse getOne(Long boardId) {
+        BoardContentResponse response = BoardContentResponse.saveToDTO(boardRepository.findById(boardId).get());
+        return response;
     }
 }
