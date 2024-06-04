@@ -7,7 +7,13 @@ import kr.co.introme.introme.domain.member.application.MemberSigninService;
 import kr.co.introme.introme.domain.member.application.MemberSignupService;
 import kr.co.introme.introme.domain.member.dto.MemberSignInRequest;
 import kr.co.introme.introme.domain.member.dto.MemberSignUpRequest;
+import kr.co.introme.introme.domain.member.dto.PhoneVerificationRequest;
+import kr.co.introme.introme.domain.member.dto.PhoneVerificationResponse;
+import kr.co.introme.introme.global.config.SmsProperties;
 import lombok.RequiredArgsConstructor;
+import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
+import net.nurigo.sdk.message.model.Message;
+import net.nurigo.sdk.message.service.DefaultMessageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +27,8 @@ public class MemberApi {
 
     private final MemberSignupService memberSignupService;
     private final MemberSigninService memberSigninService;
+    private final SmsProperties smsProperties;
+    private final DefaultMessageService messageService;
 
     @Operation(summary = "회원가입", description = "dto로 받은 회원가입 정보를 저장합니다.")
     @PostMapping("/signup")
@@ -37,6 +45,24 @@ public class MemberApi {
             return ResponseEntity.ok().header("Authorization", "Bearer " + response.get("token")).body(response);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("로그인 실패: " + e.getMessage());
+        }
+    }
+
+    @Operation(summary = "전화번호 인증 요청", description = "회원가입 전에 전화번호 인증을 요청합니다.")
+    @PostMapping("/verify-phone")
+    public ResponseEntity<PhoneVerificationResponse> verifyPhone(@Valid @RequestBody PhoneVerificationRequest phoneVerificationRequest) {
+        Message message = new Message();
+        message.setFrom(smsProperties.getFromNumber());
+        message.setTo(phoneVerificationRequest.getPhoneNumber());
+        message.setText("인증번호: " + phoneVerificationRequest.getVerificationCode());
+
+        try {
+            messageService.send(message);
+            return ResponseEntity.ok(new PhoneVerificationResponse("인증번호 발송 완료!"));
+        } catch (NurigoMessageNotReceivedException exception) {
+            return ResponseEntity.badRequest().body(new PhoneVerificationResponse("인증번호 발송 실패: " + exception.getMessage()));
+        } catch (Exception exception) {
+            return ResponseEntity.badRequest().body(new PhoneVerificationResponse("오류 발생: " + exception.getMessage()));
         }
     }
 }

@@ -40,3 +40,8 @@ springdoc:
     base-url: /
   api-docs:
     path: /api/v3/api-docs
+
+sms:
+  api-key: "NCSPW7P6GR24B568"
+  api-secret: "V1XAHEELEGV8OCJDCQFNJST1OZ5OQFSE"
+  from-number: "01099157740"

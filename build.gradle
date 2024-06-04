@@ -55,6 +55,9 @@ dependencies {
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 
 	implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+	implementation 'net.nurigo:sdk:4.2.7'
+
+
 }
 
 tasks.named('test') {
