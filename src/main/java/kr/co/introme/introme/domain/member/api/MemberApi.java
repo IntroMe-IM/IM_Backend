@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import kr.co.introme.introme.domain.member.application.MemberSigninService;
 import kr.co.introme.introme.domain.member.application.MemberSignupService;
+import kr.co.introme.introme.domain.member.application.VerificationService;
 import kr.co.introme.introme.domain.member.dto.MemberSignInRequest;
 import kr.co.introme.introme.domain.member.dto.MemberSignUpRequest;
 import kr.co.introme.introme.domain.member.dto.PhoneVerificationRequest;
@@ -27,12 +28,16 @@ public class MemberApi {
 
     private final MemberSignupService memberSignupService;
     private final MemberSigninService memberSigninService;
+    private final VerificationService verificationService;
     private final SmsProperties smsProperties;
     private final DefaultMessageService messageService;
 
     @Operation(summary = "회원가입", description = "dto로 받은 회원가입 정보를 저장합니다.")
     @PostMapping("/signup")
-    public ResponseEntity<String> save(@Valid @RequestBody MemberSignUpRequest memberSignUpRequest) {
+    public ResponseEntity<String> save(@Valid @RequestBody MemberSignUpRequest memberSignUpRequest, @RequestParam String verificationCode) {
+        if (!verificationService.verifyCode(memberSignUpRequest.getPhoneNumber(), verificationCode)) {
+            return ResponseEntity.badRequest().body("인증번호가 일치하지 않습니다.");
+        }
         memberSignupService.signUp(memberSignUpRequest);
         return ResponseEntity.ok("회원가입 완료!");
     }
@@ -51,10 +56,13 @@ public class MemberApi {
     @Operation(summary = "전화번호 인증 요청", description = "회원가입 전에 전화번호 인증을 요청합니다.")
     @PostMapping("/verify-phone")
     public ResponseEntity<PhoneVerificationResponse> verifyPhone(@Valid @RequestBody PhoneVerificationRequest phoneVerificationRequest) {
+        String verificationCode = verificationService.generateVerificationCode();
+        verificationService.saveVerificationCode(phoneVerificationRequest.getPhoneNumber(), verificationCode);
+
         Message message = new Message();
         message.setFrom(smsProperties.getFromNumber());
         message.setTo(phoneVerificationRequest.getPhoneNumber());
-        message.setText("인증번호: " + phoneVerificationRequest.getVerificationCode());
+        message.setText("인증번호: " + verificationCode);
 
         try {
             messageService.send(message);

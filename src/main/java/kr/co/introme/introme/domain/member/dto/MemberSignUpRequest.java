@@ -31,7 +31,7 @@ public class MemberSignUpRequest {
     @Schema(description = "회원 조직", example = "Introme")
     private String organization;
 
-    @Schema(description = "회원 전화번호", example = "010-1234-5678")
+    @Schema(description = "회원 전화번호", example = "01012345678")
     @NotBlank(message = "전화번호는 필수 항목입니다.")
     private String phoneNumber;
 
