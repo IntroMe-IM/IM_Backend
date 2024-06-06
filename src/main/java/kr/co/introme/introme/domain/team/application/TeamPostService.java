@@ -8,6 +8,7 @@ import kr.co.introme.introme.domain.team.dto.TeamPostResponse;
 import kr.co.introme.introme.domain.team.repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -17,8 +18,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class TeamPostService {
     private final MemberRepository memberRepository;
-    private final TeamRepository teamRepository;
 
+    @Transactional(readOnly = true)
     public List<TeamPostResponse> getTeamList(Long memberId) {
         Member member = memberRepository.findById(memberId).get();
         Set<Team> team = member.getTeams();
