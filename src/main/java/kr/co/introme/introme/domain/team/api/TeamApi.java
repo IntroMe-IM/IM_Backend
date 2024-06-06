@@ -1,6 +1,7 @@
 package kr.co.introme.introme.domain.team.api;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.co.introme.introme.domain.team.application.InviteTeamService;
 import kr.co.introme.introme.domain.team.application.TeamBuildService;
 import kr.co.introme.introme.domain.team.application.TeamPostService;
@@ -8,12 +9,14 @@ import kr.co.introme.introme.domain.team.application.TeamUpdateService;
 import kr.co.introme.introme.domain.team.dto.TeamBuildRequest;
 import kr.co.introme.introme.domain.team.dto.TeamPostResponse;
 import kr.co.introme.introme.domain.team.dto.TeamTerminateRequest;
+import kr.co.introme.introme.domain.team.dto.TeamUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "팀 API", description = "팀 빌드, 수정, 조회 API")
 @RestController
 @RequestMapping("/v1/team")
 @RequiredArgsConstructor
@@ -59,6 +62,13 @@ public class TeamApi {
     public ResponseEntity<List<TeamPostResponse>> getTeam(@PathVariable Long memberId){
         List<TeamPostResponse> lists = teamPostService.getTeamList(memberId);
         return ResponseEntity.ok(lists);
+    }
+
+    @Operation(summary = "팀 수정", description = "설명이나 팀 이름을 수정합니다.")
+    @PutMapping("/{teamId}")
+    public ResponseEntity<String> updateTeam(@PathVariable Long teamId, @RequestBody TeamUpdateRequest teamUpdateRequest){
+        teamUpdateService.update(teamId, teamUpdateRequest);
+        return ResponseEntity.ok("수정완료!");
     }
 
 //    @GetMapping("/cards/{teamId}")

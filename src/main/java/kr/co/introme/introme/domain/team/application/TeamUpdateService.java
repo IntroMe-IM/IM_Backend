@@ -1,10 +1,13 @@
 package kr.co.introme.introme.domain.team.application;
 
 import kr.co.introme.introme.domain.team.domain.Team;
+import kr.co.introme.introme.domain.team.dto.TeamPostResponse;
 import kr.co.introme.introme.domain.team.dto.TeamTerminateRequest;
+import kr.co.introme.introme.domain.team.dto.TeamUpdateRequest;
 import kr.co.introme.introme.domain.team.repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
@@ -33,6 +36,16 @@ public class TeamUpdateService {
             }
         }else {
             return null;
+        }
+    }
+
+    @Transactional
+    public void update(Long teamId, TeamUpdateRequest teamUpdateRequest) {
+        Team team = teamRepository.findById(teamId).get();
+        if(team != null){
+            team.setName(teamUpdateRequest.getName());
+            team.setProject(teamUpdateRequest.getProject());
+            team.setDescription(teamUpdateRequest.getDescription());
         }
     }
 }
