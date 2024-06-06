@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -38,7 +40,7 @@ public class Member {
 
     @Column
     @Temporal(TemporalType.DATE)
-    private Date birthday;
+    private LocalDate birthday;
 
     @Column(nullable = false)
     private String password;
@@ -73,5 +75,10 @@ public class Member {
         member.setPhoneNumber(memberSignUpRequest.getPhoneNumber());
         member.setBirthday(memberSignUpRequest.getBirthday());
         return member;
+    }
+    public void calculateAge() {
+        if (this.birthday != null) {
+            this.age = Period.between(this.birthday, LocalDate.now()).getYears();
+        }
     }
 }

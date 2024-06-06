@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -39,5 +41,5 @@ public class MemberSignUpRequest {
     private String url;
 
     @Schema(description = "회원 생일", example = "2000-01-01")
-    private Date birthday;
+    private LocalDate birthday;
 }
