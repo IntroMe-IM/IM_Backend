@@ -1,5 +1,6 @@
 # 자동 줄바꿈 변환 설정
 * text=auto
+* text eol=lf
 
 # 특정 파일 형식에 대한 줄바꿈 형식 설정
 *.yml text eol=lf

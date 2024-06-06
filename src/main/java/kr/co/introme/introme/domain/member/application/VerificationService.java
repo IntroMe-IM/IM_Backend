@@ -2,14 +2,14 @@ package kr.co.introme.introme.domain.member.application;
 
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class VerificationService {
 
-    private final Map<String, String> verificationCodes = new HashMap<>();
+    private final Map<String, String> verificationCodes = new ConcurrentHashMap<>();
     private final Random random = new Random();
 
     public String generateVerificationCode() {
