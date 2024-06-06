@@ -22,6 +22,7 @@ public class MemberSignupService {
     @Transactional
     public void signUp(MemberSignUpRequest memberSignUpRequest) {
         Member member = Member.saveToEntity(memberSignUpRequest);
+        member.calculateAge();  // 나이를 계산하는 로직 추가
         memberRepository.save(member);
 
         // URL 생성 및 저장
