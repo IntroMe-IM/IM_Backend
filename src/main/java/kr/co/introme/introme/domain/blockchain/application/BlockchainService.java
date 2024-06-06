@@ -1,42 +1,50 @@
 package kr.co.introme.introme.domain.blockchain.application;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import kr.co.introme.introme.domain.blockchain.domain.Block;
-import kr.co.introme.introme.domain.blockchain.domain.Blockchain;
 import kr.co.introme.introme.domain.blockchain.repository.BlockRepository;
-import kr.co.introme.introme.domain.blockchain.repository.BlockchainRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BlockchainService {
-    private final BlockchainRepository blockchainRepository;
     private final BlockRepository blockRepository;
 
-    public Blockchain getBlockchain(Long id) {
-        return blockchainRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Blockchain not found"));
-    }
-
-    public Blockchain createBlockchain() {
-        Blockchain blockchain = new Blockchain();
-        return blockchainRepository.save(blockchain);
+    public List<Block> getBlockchainByMemberId(Long memberId) {
+        return blockRepository.findByMemberId(memberId);
     }
 
     @Transactional
-    public void addBlock(Long blockchainId, Long memberId, int contribution) {
-        Blockchain blockchain = getBlockchain(blockchainId);
-        Block newBlock = new Block(blockchain.getLatestBlock().getHash(), memberId, contribution);
-        blockchain.addBlock(newBlock);
-        blockchainRepository.save(blockchain);
+    public void addBlock(Long memberId, int contribution) {
+        List<Block> blockchain = getBlockchainByMemberId(memberId);
+        Block newBlock;
+        if (blockchain.isEmpty()) {
+            newBlock = new Block("0", memberId, contribution);
+        } else {
+            Block latestBlock = blockchain.get(blockchain.size() - 1);
+            newBlock = new Block(latestBlock.getHash(), memberId, contribution);
+        }
+        blockRepository.save(newBlock);
     }
 
     @Transactional
-    public boolean isBlockchainValid(Long id) {
-        Blockchain blockchain = getBlockchain(id);
-        return blockchain.isChainValid();
+    public boolean isBlockchainValid(Long memberId) {
+        List<Block> blockchain = getBlockchainByMemberId(memberId);
+        for (int i = 1; i < blockchain.size(); i++) {
+            Block currentBlock = blockchain.get(i);
+            Block previousBlock = blockchain.get(i - 1);
+
+            if (!currentBlock.getHash().equals(currentBlock.calculateHash())) {
+                return false;
+            }
+
+            if (!currentBlock.getPreviousHash().equals(previousBlock.getHash())) {
+                return false;
+            }
+        }
+        return true;
     }
 }

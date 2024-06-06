@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 
@@ -42,6 +42,14 @@ public class Block {
         this.contribution = contribution;
         this.timeStamp = LocalDateTime.now();
         this.hash = calculateHash();
+    }
+
+    public Block(String previousHash, String hash) {
+        this.previousHash = previousHash;
+        this.memberId = 0L;
+        this.contribution = 0;
+        this.timeStamp = LocalDateTime.now();
+        this.hash = hash;
     }
 
     public String calculateHash() {
