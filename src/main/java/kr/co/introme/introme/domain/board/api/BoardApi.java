@@ -1,6 +1,7 @@
 package kr.co.introme.introme.domain.board.api;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.co.introme.introme.domain.board.application.BoardPostService;
 import kr.co.introme.introme.domain.board.dto.BoardContentResponse;
 import kr.co.introme.introme.domain.board.dto.BoardPageRequest;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "게시글 API", description = "게시글 페이지네이션, 작성, 조회")
 @Controller
 @RequestMapping("/v1/board")
 @RequiredArgsConstructor
@@ -29,7 +31,7 @@ public class BoardApi {
 
     }
 
-    @Operation(summary = "게시글 상세", description = "게시글의 상세 정보를 표기하고 조회수를 카운팅합니다.")
+    @Operation(summary = "게시글 조회", description = "게시글의 상세 정보를 표기하고 조회수를 카운팅합니다.")
     @GetMapping("/{board_id}")
     public ResponseEntity<BoardContentResponse> hit(@PathVariable Long board_id){
         boardPostService.hit(board_id);
@@ -37,7 +39,7 @@ public class BoardApi {
         return ResponseEntity.ok(response);
     }
 
-    @Operation(summary = "게시글 요청", description = "cursor를 이용해 무한 스크롤 방식의 게시판")
+    @Operation(summary = "게시글 페이지네이션", description = "cursor based infinity pagination 입니다.")
     @PostMapping("/page")
     public ResponseEntity<BoardPageResponse<BoardContentResponse>> getBoardPage(@RequestBody BoardPageRequest boardPageRequest){
         return ResponseEntity.ok(boardPostService.getBoards(boardPageRequest.getPage(), boardPageRequest.getSize()));

@@ -20,16 +20,15 @@ public class Blockchain {
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "blockchain_id")
+    @JoinColumn(name = "block_id")
     private List<Block> chain = new ArrayList<>();
 
     public Blockchain() {
-        // Genesis block
-        chain.add(createGenesisBlock());
+        // Genesis block is created in addGenesisBlock method
     }
 
-    private Block createGenesisBlock() {
-        return new Block("0", 0L, 0);
+    public void addGenesisBlock(Block genesisBlock) {
+        chain.add(genesisBlock);
     }
 
     public Block getLatestBlock() {

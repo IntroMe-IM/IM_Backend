@@ -1,6 +1,7 @@
 package kr.co.introme.introme.domain.board.api;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.co.introme.introme.domain.board.application.CommentPostService;
 import kr.co.introme.introme.domain.board.domain.Comment;
 import kr.co.introme.introme.domain.board.dto.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
+@Tag(name = "댓글 API", description = "댓글 조회, 댓글 작성")
 @Controller
 @RequestMapping("/v1/comment")
 @RequiredArgsConstructor
@@ -30,7 +32,7 @@ public class CommentApi {
         }
     }
 
-    @Operation(summary = "댓글 요청", description = "댓글을 전부 가져오는 서비스")
+    @Operation(summary = "댓글 조회", description = "댓글을 전부 가져옵니다.")
     @PostMapping("/comment")
     public ResponseEntity<List<CommentContentResponse>> getBoardPage(@RequestBody Long boardId){
         return ResponseEntity.ok(commentPostService.getComment(boardId));
