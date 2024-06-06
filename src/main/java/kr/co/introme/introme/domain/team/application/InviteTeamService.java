@@ -33,4 +33,9 @@ public class InviteTeamService {
         team.addMember(member);
         teamRepository.save(team);
     }
+
+    public String sharedUrl(Long teamId) {
+        Team team = teamRepository.findById(teamId).get();
+        return team.getUrl();
+    }
 }
