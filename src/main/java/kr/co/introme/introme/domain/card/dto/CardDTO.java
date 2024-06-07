@@ -14,6 +14,7 @@ public class CardDTO {
     private String name;
     private String phoneNumber;
     private String company;
+    private String email;
 
     public CardDTO(Card card) {
         this.id = card.getId();
@@ -21,5 +22,6 @@ public class CardDTO {
         this.name = owner.getName();
         this.phoneNumber = owner.getPhoneNumber();
         this.company = owner.getOrganization();
+        this.email = owner.getEmail();
     }
 }
