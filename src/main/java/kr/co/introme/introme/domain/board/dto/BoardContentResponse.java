@@ -18,15 +18,17 @@ public class BoardContentResponse {
     private LocalDate updateAt;
     private Integer hit;
     private String imgUrl;
-    private Long author;
+    private Long authorId;
+    private String author;
 
-    public static BoardContentResponse boardLists(Long id, String title, LocalDate createAt, LocalDate updateAt, Integer hit, Long author) {
+    public static BoardContentResponse boardLists(Long id, String title, LocalDate createAt, LocalDate updateAt, Integer hit, Long authorId, String author) {
         BoardContentResponse content = new BoardContentResponse();
         content.setId(id);
         content.setTitle(title);
         content.setCreateAt(createAt);
         content.setUpdateAt(updateAt);
         content.setHit(hit);
+        content.setAuthorId(authorId);
         content.setAuthor(author);
         return content;
     }
@@ -41,7 +43,8 @@ public class BoardContentResponse {
         boardContentResponse.setUpdateAt(board.getUpdateAt());
         boardContentResponse.setHit(board.getHit());
         boardContentResponse.setImgUrl(board.getImgUrl());
-        boardContentResponse.setAuthor(board.getAuthor().getId());
+        boardContentResponse.setAuthorId(board.getAuthor().getId());
+        boardContentResponse.setAuthor(board.getAuthor().getName());
         return boardContentResponse;
     }
 }

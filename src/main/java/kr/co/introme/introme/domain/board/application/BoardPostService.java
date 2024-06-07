@@ -51,7 +51,8 @@ public class BoardPostService {
                         board.getCreateAt(),
                         board.getUpdateAt(),
                         board.getHit(),
-                        board.getAuthor().getId()
+                        board.getAuthor().getId(),
+                        board.getAuthor().getName()
                 )).collect(Collectors.toList());
         return new BoardPageResponse<>(
                 boardPage.getTotalPages(),
