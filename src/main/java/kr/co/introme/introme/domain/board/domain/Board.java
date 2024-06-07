@@ -41,7 +41,7 @@ public class Board {
     @Column
     private String imgUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id", nullable = false)
     private Member author;
 
