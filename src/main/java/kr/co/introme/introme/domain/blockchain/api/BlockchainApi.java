@@ -12,7 +12,7 @@ import java.util.List;
 
 @Tag(name = "블록체인 API", description = "블록 추가, 블록유효성 검사")
 @RestController
-@RequestMapping("/api/blockchain")
+@RequestMapping("/v1/blockchain")
 @RequiredArgsConstructor
 public class BlockchainApi {
     private final BlockchainService blockchainService;
