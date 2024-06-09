@@ -37,9 +37,6 @@ public class MemberSignUpRequest {
     @NotBlank(message = "전화번호는 필수 항목입니다.")
     private String phoneNumber;
 
-    @Schema(description = "회원 URL", example = "http://introme.kr")
-    private String url;
-
     @Schema(description = "회원 생일", example = "2000-01-01")
     private LocalDate birthday;
 }

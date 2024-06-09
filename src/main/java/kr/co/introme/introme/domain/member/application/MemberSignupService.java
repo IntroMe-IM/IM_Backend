@@ -27,7 +27,7 @@ public class MemberSignupService {
 
         // URL 생성 및 저장
         String encodedData = Base64.getEncoder().encodeToString(member.getId().toString().getBytes(StandardCharsets.UTF_8));
-        String url = "http://introme.co.kr/v1/card/shared-card/" + encodedData;
+        String url = "https://introme.co.kr/v1/card/shared-card/" + encodedData;
         member.setUrl(url);
         memberRepository.save(member);
 
