@@ -6,10 +6,7 @@ import jakarta.validation.Valid;
 import kr.co.introme.introme.domain.member.application.MemberSigninService;
 import kr.co.introme.introme.domain.member.application.MemberSignupService;
 import kr.co.introme.introme.domain.member.application.VerificationService;
-import kr.co.introme.introme.domain.member.dto.MemberSignInRequest;
-import kr.co.introme.introme.domain.member.dto.MemberSignUpRequest;
-import kr.co.introme.introme.domain.member.dto.PhoneVerificationRequest;
-import kr.co.introme.introme.domain.member.dto.PhoneVerificationResponse;
+import kr.co.introme.introme.domain.member.dto.*;
 import kr.co.introme.introme.global.config.SmsProperties;
 import lombok.RequiredArgsConstructor;
 import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
@@ -72,5 +69,12 @@ public class MemberApi {
         } catch (Exception exception) {
             return ResponseEntity.badRequest().body(new PhoneVerificationResponse("오류 발생: " + exception.getMessage()));
         }
+    }
+
+    @Operation(summary = "회원 정보 반환", description = "회원의 정보를 반환합니다.")
+    @GetMapping("/{memberId}")
+    public ResponseEntity<MemberResponse> memberReturn(@PathVariable Long memberId){
+        MemberResponse result = memberSigninService.findMember(memberId);
+        return ResponseEntity.ok(result);
     }
 }
