@@ -16,4 +16,7 @@ public class SmsProperties {
 
     @Value("${sms.from-number}")
     private String fromNumber;
+
+    @Value("${sms.debug-code}")
+    private String debugCode;
 }

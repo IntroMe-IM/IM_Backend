@@ -53,33 +53,6 @@ public class ApplicationInitializer {
                 cardRepository.save(testUserCard);
             }
 
-            if (!memberRepository.existsByEmail("user2@introme.kr")) {
-                Member testUser = new Member();
-                testUser.setEmail("user2@introme.kr");
-                testUser.setName("User2");
-                testUser.setPhoneNumber("010-1234-5670");
-                testUser.setPassword(passwordEncoder.encode("password"));
-                memberRepository.save(testUser);
-
-                Card testUserCard = new Card();
-                testUserCard.setOwner(testUser);
-                testUserCard.setDescription("Default description");
-                cardRepository.save(testUserCard);
-            }
-
-            if (!memberRepository.existsByEmail("user3@introme.kr")) {
-                Member testUser = new Member();
-                testUser.setEmail("user3@introme.kr");
-                testUser.setName("User3");
-                testUser.setPhoneNumber("010-1234-5671");
-                testUser.setPassword(passwordEncoder.encode("password"));
-                memberRepository.save(testUser);
-
-                Card testUserCard = new Card();
-                testUserCard.setOwner(testUser);
-                testUserCard.setDescription("Default description");
-                cardRepository.save(testUserCard);
-            }
 
             if (blockRepository.count() == 0) {
                 Block genesisBlock = new Block("0", "initial_hash_value");
