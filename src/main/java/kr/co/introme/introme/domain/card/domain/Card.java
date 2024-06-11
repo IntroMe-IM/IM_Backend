@@ -21,6 +21,8 @@ public class Card {
     @Column
     private String description;
 
+    @Column String color;
+
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = false)
     private Member owner;
