@@ -12,6 +12,7 @@ import lombok.Setter;
 public class CardDTO {
     private Long id;
     private String name;
+    private String description;
     private String phoneNumber;
     private String company;
     private String email;
@@ -25,5 +26,6 @@ public class CardDTO {
         this.company = owner.getOrganization();
         this.email = owner.getEmail();
         this.color = card.getColor();
+        this.description = card.getDescription();
     }
 }

@@ -38,4 +38,22 @@ public class CardApi {
         List<CardDTO> sharedCards = cardService.getSharedCards(memberId);
         return ResponseEntity.ok(sharedCards);
     }
+
+    @Operation(summary = "명합 업데이트", description = "명함의 정보를 변경합니다.")
+    @PutMapping("/card/{memberId}")
+    public ResponseEntity<String> updateCard(@PathVariable Long memberId, @RequestBody CardDTO cardDTO){
+        Boolean result = cardService.changeCard(memberId, cardDTO);
+        if(result){
+            return ResponseEntity.ok("업데이트 완료");
+        }else {
+            return ResponseEntity.ok("입력값을 확인하세요.");
+        }
+    }
+
+    @Operation(summary = "명합 요청", description = "명함의 정보를 반환합니다.")
+    @GetMapping("/card/{memberId}")
+    public ResponseEntity<CardDTO> getCard(@PathVariable Long memberId){
+        CardDTO cardDTO = cardService.getCardInfo(memberId);
+        return ResponseEntity.ok(cardDTO);
+    }
 }

@@ -64,4 +64,30 @@ public class CardService {
                 .map(sharedCard -> new CardDTO(sharedCard.getCard()))
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public Boolean changeCard(Long memberId, CardDTO cardDTO) {
+        Card card = cardRepository.findById(memberId).get();
+        if(card != null){
+            card.setDescription(cardDTO.getDescription());
+            card.setColor(cardDTO.getColor());
+            card.getOwner().setEmail(cardDTO.getEmail());
+            card.getOwner().setName(cardDTO.getName());
+            card.getOwner().setOrganization(cardDTO.getCompany());
+            cardRepository.save(card);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public CardDTO getCardInfo(Long memberId) {
+        Card card = cardRepository.findById(memberId).get();
+        if(card != null){
+            CardDTO cardDTO = new CardDTO(card);
+            return cardDTO;
+        } else {
+            return null;
+        }
+    }
 }
