@@ -47,7 +47,7 @@ public class TeamApi {
         return ResponseEntity.ok(result);
     }
 
-    @Operation(summary = "팀 URL 공유", description = "팀에 초대할떄 필요한 Hash-uri를 반환합니다.")
+    @Operation(summary = "팀 Hash 공유", description = "팀에 초대할떄 필요한 Hash-uri를 반환합니다.")
     @GetMapping("/get-url/{teamId}")
     public ResponseEntity<String> share(@PathVariable Long teamId){
         String result = inviteTeamService.sharedUrl(teamId);
