@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import kr.co.introme.introme.domain.card.domain.Card;
 import kr.co.introme.introme.domain.card.domain.SharedCard;
 import kr.co.introme.introme.domain.card.dto.CardDTO;
+import kr.co.introme.introme.domain.card.dto.CardUpdateRequest;
 import kr.co.introme.introme.domain.card.repository.CardRepository;
 import kr.co.introme.introme.domain.card.repository.SharedCardRepository;
 import kr.co.introme.introme.domain.member.domain.Member;
@@ -66,12 +67,11 @@ public class CardService {
     }
 
     @Transactional
-    public Boolean changeCard(Long memberId, CardDTO cardDTO) {
+    public Boolean changeCard(Long memberId, CardUpdateRequest cardDTO) {
         Card card = cardRepository.findById(memberId).get();
         if(card != null){
             card.setDescription(cardDTO.getDescription());
             card.setColor(cardDTO.getColor());
-            card.getOwner().setEmail(cardDTO.getEmail());
             card.getOwner().setName(cardDTO.getName());
             card.getOwner().setOrganization(cardDTO.getCompany());
             cardRepository.save(card);

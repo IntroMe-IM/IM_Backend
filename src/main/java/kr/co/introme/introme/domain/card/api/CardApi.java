@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.co.introme.introme.domain.card.application.CardService;
 import kr.co.introme.introme.domain.card.dto.CardDTO;
+import kr.co.introme.introme.domain.card.dto.CardUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,7 @@ public class CardApi {
 
     @Operation(summary = "명합 업데이트", description = "명함의 정보를 변경합니다.")
     @PutMapping("/card/{memberId}")
-    public ResponseEntity<String> updateCard(@PathVariable Long memberId, @RequestBody CardDTO cardDTO){
+    public ResponseEntity<String> updateCard(@PathVariable Long memberId, @RequestBody CardUpdateRequest cardDTO){
         Boolean result = cardService.changeCard(memberId, cardDTO);
         if(result){
             return ResponseEntity.ok("업데이트 완료");
