@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class BoardPostService {
     }
 
     public BoardPageResponse<BoardContentResponse> getBoards(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Order.desc("createAt")));
         Page<Board> boardPage = boardRepository.findAll(pageable);
         List<BoardContentResponse> content = boardPage.getContent().stream()
                 .map(board -> BoardContentResponse.boardLists(
