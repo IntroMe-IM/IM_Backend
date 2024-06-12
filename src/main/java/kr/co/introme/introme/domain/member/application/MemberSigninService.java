@@ -3,6 +3,7 @@ package kr.co.introme.introme.domain.member.application;
 import kr.co.introme.introme.domain.member.dto.MemberResponse;
 import kr.co.introme.introme.domain.member.dto.MemberSignInRequest;
 import kr.co.introme.introme.domain.member.domain.Member;
+import kr.co.introme.introme.domain.member.dto.MemberUpdateRequest;
 import kr.co.introme.introme.domain.member.repository.MemberRepository;
 import kr.co.introme.introme.domain.member.exception.CustomExceptions.MemberNotFoundException;
 import kr.co.introme.introme.domain.member.exception.CustomExceptions.InvalidPasswordException;
@@ -49,5 +50,18 @@ public class MemberSigninService {
             return memberResponse;
         }
         return null;
+    }
+
+    public Boolean updating(Long memberId, MemberUpdateRequest memberUpdateRequest) {
+        Member member = memberRepository.findById(memberId).get();
+        if(member != null){
+            member.setName(memberUpdateRequest.getName());
+            member.setMbti(memberUpdateRequest.getMbti());
+            member.setOrganization(memberUpdateRequest.getOrganization());
+            memberRepository.save(member);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

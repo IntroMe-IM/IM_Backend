@@ -77,4 +77,15 @@ public class MemberApi {
         MemberResponse result = memberSigninService.findMember(memberId);
         return ResponseEntity.ok(result);
     }
+
+    @Operation(summary = "회원 정보 수정", description = "회원의 정보를 수정합니다.")
+    @PutMapping("/{memberId}")
+    public ResponseEntity<String> updateMember(@PathVariable Long memberId, @RequestBody MemberUpdateRequest memberUpdateRequest){
+        Boolean result = memberSigninService.updating(memberId, memberUpdateRequest);
+        if(result){
+            return ResponseEntity.ok("수정 완료!");
+        } else {
+            return ResponseEntity.ok("입력값을 확인하세요!");
+        }
+    }
 }
