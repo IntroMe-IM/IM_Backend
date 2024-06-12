@@ -6,10 +6,7 @@ import kr.co.introme.introme.domain.team.application.InviteTeamService;
 import kr.co.introme.introme.domain.team.application.TeamBuildService;
 import kr.co.introme.introme.domain.team.application.TeamPostService;
 import kr.co.introme.introme.domain.team.application.TeamUpdateService;
-import kr.co.introme.introme.domain.team.dto.TeamBuildRequest;
-import kr.co.introme.introme.domain.team.dto.TeamPostResponse;
-import kr.co.introme.introme.domain.team.dto.TeamTerminateRequest;
-import kr.co.introme.introme.domain.team.dto.TeamUpdateRequest;
+import kr.co.introme.introme.domain.team.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -69,6 +66,13 @@ public class TeamApi {
     public ResponseEntity<String> updateTeam(@PathVariable Long teamId, @RequestBody TeamUpdateRequest teamUpdateRequest){
         teamUpdateService.update(teamId, teamUpdateRequest);
         return ResponseEntity.ok("수정완료!");
+    }
+
+    @Operation(summary = "팀 상세", description = "팀의 상세 정보를 반환합니다.")
+    @GetMapping("/d/{teamId}")
+    public ResponseEntity<TeamDetailResponse> getOneTeam(@PathVariable Long teamId){
+        TeamDetailResponse teamDetailResponse = teamPostService.getTeamOne(teamId);
+        return ResponseEntity.ok(teamDetailResponse);
     }
 
 //    @GetMapping("/cards/{teamId}")
