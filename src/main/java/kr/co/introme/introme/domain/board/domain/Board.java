@@ -45,7 +45,7 @@ public class Board {
     @JoinColumn(name = "author_id", nullable = false)
     private Member author;
 
-    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Comment> comments;
 
     public static Board saveToEntity(BoardPostRequest boardPostRequest, Member member) {

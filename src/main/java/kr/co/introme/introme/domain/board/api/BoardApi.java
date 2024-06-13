@@ -2,11 +2,10 @@ package kr.co.introme.introme.domain.board.api;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import kr.co.introme.introme.domain.board.application.BoardDeleteService;
 import kr.co.introme.introme.domain.board.application.BoardPostService;
-import kr.co.introme.introme.domain.board.dto.BoardContentResponse;
-import kr.co.introme.introme.domain.board.dto.BoardPageRequest;
-import kr.co.introme.introme.domain.board.dto.BoardPageResponse;
-import kr.co.introme.introme.domain.board.dto.BoardPostRequest;
+import kr.co.introme.introme.domain.board.application.BoardUpdateService;
+import kr.co.introme.introme.domain.board.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class BoardApi {
     private final BoardPostService boardPostService;
+    private final BoardDeleteService boardDeleteService;
+    private final BoardUpdateService boardUpdateService;
+
 
     @Operation(summary = "게시글 작성", description = "게시글 작성 정보를 저장합니다.")
     @PostMapping("/")
@@ -37,6 +39,20 @@ public class BoardApi {
         boardPostService.hit(board_id);
         BoardContentResponse response = boardPostService.getOne(board_id);
         return ResponseEntity.ok(response);
+    }
+
+    @Operation(summary = "게시글 수정", description = "게시글을 수정합니다.")
+    @PutMapping("/{board_id}")
+    public ResponseEntity<String> updating(@PathVariable Long board_id, @RequestBody BoardUpdateRequest boardUpdateRequest){
+        String result = boardUpdateService.updateBoard(board_id, boardUpdateRequest);
+        return ResponseEntity.ok(result);
+    }
+
+    @Operation(summary = "게시글 삭제", description = "게시글을 삭제합니다.")
+    @DeleteMapping("/{board_id}/{member_id}")
+    public ResponseEntity<String> deleteBoard(@PathVariable Long board_id, Long member_id){
+        String result = boardDeleteService.delete(board_id, member_id);
+        return ResponseEntity.ok(result);
     }
 
     @Operation(summary = "게시글 페이지네이션", description = "cursor based infinity pagination 입니다.")
