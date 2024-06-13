@@ -30,6 +30,11 @@ public class TeamPostService {
                         teams.getId(),
                         teams.getName(),
                         teams.getOwnerId(),
+                        teams.getMembers().stream()
+                                .filter(members -> members.getId().equals(teams.getOwnerId()))
+                                .map(members -> members.getName())
+                                .findFirst()
+                                .orElse(null),
                         teams.getTerminateDate() != null,
                         teams.getCreatedDate(),
                         teams.getTerminateDate(),

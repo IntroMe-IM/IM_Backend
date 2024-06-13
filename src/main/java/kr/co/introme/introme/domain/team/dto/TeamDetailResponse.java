@@ -25,6 +25,7 @@ public class TeamDetailResponse {
     private LocalDate createdDate;
     private LocalDate terminateDate;
     private Long ownerId;
+    private String ownerName;
     private List<String> members;
 
     public TeamDetailResponse(Team team){
@@ -36,6 +37,11 @@ public class TeamDetailResponse {
         this.setCreatedDate(team.getCreatedDate());
         this.setTerminateDate(team.getTerminateDate());
         this.setOwnerId(team.getOwnerId());
+        this.setOwnerName(team.getMembers().stream()
+                .filter(member -> member.getId().equals(team.getOwnerId()))
+                .map(member -> member.getName())
+                .findFirst()
+                .orElse(null));
         this.setMembers(
                 team.getMembers().stream().map(member -> member.getName()).toList()
         );

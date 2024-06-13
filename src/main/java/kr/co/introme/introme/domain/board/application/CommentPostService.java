@@ -10,6 +10,7 @@ import kr.co.introme.introme.domain.member.domain.Member;
 import kr.co.introme.introme.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,7 +33,7 @@ public class CommentPostService {
             return "Can Not Found Member or Board";
         }
     }
-
+    @Transactional
     public List<CommentContentResponse> getComment(Long boardId){
         List<Comment> commentList = commentRepository.findByBoardId(boardId);
         List<CommentContentResponse> commentContent = commentList.stream().map(comment -> new CommentContentResponse(
@@ -41,6 +42,7 @@ public class CommentPostService {
                 comment.getCreateAt(),
                 comment.getUpdateAt(),
                 comment.getAuthor().getId(),
+                comment.getAuthor().getName(),
                 comment.getBoard().getId()
         )).collect(Collectors.toList());
         return commentContent;

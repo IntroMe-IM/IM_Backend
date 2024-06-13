@@ -14,5 +14,6 @@ public class CommentContentResponse {
     private LocalDate createAt;
     private LocalDate updateAt;
     private Long Author;
+    private String AuthorName;
     private Long Board;
 }

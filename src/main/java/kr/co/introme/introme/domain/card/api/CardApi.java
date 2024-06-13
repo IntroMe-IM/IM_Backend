@@ -41,7 +41,7 @@ public class CardApi {
     }
 
     @Operation(summary = "명함 업데이트", description = "명함의 정보를 변경합니다.")
-    @PutMapping("/card/{memberId}")
+    @PutMapping("/{memberId}")
     public ResponseEntity<String> updateCard(@PathVariable Long memberId, @RequestBody CardUpdateRequest cardDTO){
         Boolean result = cardService.changeCard(memberId, cardDTO);
         if(result){
@@ -52,7 +52,7 @@ public class CardApi {
     }
 
     @Operation(summary = "명함 요청", description = "명함의 정보를 반환합니다.")
-    @GetMapping("/card/{memberId}")
+    @GetMapping("/{memberId}")
     public ResponseEntity<CardDTO> getCard(@PathVariable Long memberId){
         CardDTO cardDTO = cardService.getCardInfo(memberId);
         return ResponseEntity.ok(cardDTO);
