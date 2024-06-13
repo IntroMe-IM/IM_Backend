@@ -58,7 +58,7 @@ public class Team {
     @Column
     private Long ownerId;
 
-    @ManyToMany(mappedBy = "teams", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "teams", cascade = CascadeType.REMOVE)
     private Set<Member> members = new HashSet<>();
 
 

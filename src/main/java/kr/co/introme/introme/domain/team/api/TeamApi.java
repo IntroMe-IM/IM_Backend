@@ -2,10 +2,7 @@ package kr.co.introme.introme.domain.team.api;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import kr.co.introme.introme.domain.team.application.InviteTeamService;
-import kr.co.introme.introme.domain.team.application.TeamBuildService;
-import kr.co.introme.introme.domain.team.application.TeamPostService;
-import kr.co.introme.introme.domain.team.application.TeamUpdateService;
+import kr.co.introme.introme.domain.team.application.*;
 import kr.co.introme.introme.domain.team.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +19,7 @@ public class TeamApi {
     private final InviteTeamService inviteTeamService;
     private final TeamUpdateService teamUpdateService;
     private final TeamPostService teamPostService;
+    private final TeamDeleteService teamDeleteService;
 
     @Operation(summary = "팀 생성", description = "팀을 생성합니다.")
     @PostMapping("/build")
@@ -66,6 +64,13 @@ public class TeamApi {
     public ResponseEntity<String> updateTeam(@PathVariable Long teamId, @RequestBody TeamUpdateRequest teamUpdateRequest){
         teamUpdateService.update(teamId, teamUpdateRequest);
         return ResponseEntity.ok("수정완료!");
+    }
+
+    @Operation(summary = "팀 삭제", description = "팀을 삭제합니다.")
+    @DeleteMapping("/{teamId}/{memberId}")
+    public ResponseEntity<String> delTeam(@PathVariable Long teamId, Long memberId){
+        String result = teamDeleteService.delete(teamId, memberId);
+        return ResponseEntity.ok(result);
     }
 
     @Operation(summary = "팀 상세", description = "팀의 상세 정보를 반환합니다.")
