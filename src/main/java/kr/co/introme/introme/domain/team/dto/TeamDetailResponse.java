@@ -37,7 +37,7 @@ public class TeamDetailResponse {
         this.setTerminateDate(team.getTerminateDate());
         this.setOwnerId(team.getOwnerId());
         this.setMembers(
-                team.getMembers().stream().map(member -> getName()).toList()
+                team.getMembers().stream().map(member -> member.getName()).toList()
         );
     }
 }
