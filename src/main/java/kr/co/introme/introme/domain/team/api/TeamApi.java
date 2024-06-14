@@ -7,6 +7,7 @@ import kr.co.introme.introme.domain.team.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -23,8 +24,9 @@ public class TeamApi {
 
     @Operation(summary = "팀 생성", description = "팀을 생성합니다.")
     @PostMapping("/build")
-    public ResponseEntity<String> build(@RequestBody TeamBuildRequest teamBuildRequest) {
-        teamBuildService.teamBuild(teamBuildRequest);
+    public ResponseEntity<String> build(@RequestPart("team") TeamBuildRequest teamBuildRequest,
+                                        @RequestPart(value = "file", required = false) MultipartFile file) {
+        teamBuildService.teamBuild(teamBuildRequest, file);
         return ResponseEntity.ok("빌드 완료");
     }
 
@@ -68,7 +70,7 @@ public class TeamApi {
 
     @Operation(summary = "팀 삭제", description = "팀을 삭제합니다.")
     @DeleteMapping("/{teamId}/{memberId}")
-    public ResponseEntity<String> delTeam(@PathVariable Long teamId, Long memberId){
+    public ResponseEntity<String> delTeam(@PathVariable Long teamId, @PathVariable Long memberId){
         String result = teamDeleteService.delete(teamId, memberId);
         return ResponseEntity.ok(result);
     }
@@ -80,9 +82,4 @@ public class TeamApi {
         return ResponseEntity.ok(teamDetailResponse);
     }
 
-//    @GetMapping("/cards/{teamId}")
-//    public ResponseEntity<List<CardDTO>> getTeamMembersCards(@PathVariable Long teamId) {
-//        List<CardDTO> cards = memberService.getTeamMembersCards(teamId);
-//        return ResponseEntity.ok(cards);
-//    }
 }

@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Tag(name = "게시글 API", description = "게시글 페이지네이션, 작성, 조회")
 @Controller
@@ -23,14 +24,14 @@ public class BoardApi {
 
     @Operation(summary = "게시글 작성", description = "게시글 작성 정보를 저장합니다.")
     @PostMapping("/")
-    public ResponseEntity<String> post(@RequestBody BoardPostRequest boardPostRequest){
-        String result = boardPostService.save(boardPostRequest);
+    public ResponseEntity<String> post(@RequestPart("board") BoardPostRequest boardPostRequest,
+                                       @RequestPart(value = "file", required = false) MultipartFile file){
+        String result = boardPostService.save(boardPostRequest, file);
         if (result.equals("ok")){
             return ResponseEntity.ok("작성완료!");
         } else {
             return ResponseEntity.ok(result);
         }
-
     }
 
     @Operation(summary = "게시글 조회", description = "게시글의 상세 정보를 표기하고 조회수를 카운팅합니다.")
