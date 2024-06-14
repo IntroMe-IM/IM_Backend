@@ -68,4 +68,9 @@ public class FileStorageService {
         Path fileToDelete = Paths.get(uploadDir).resolve(fileName);
         Files.deleteIfExists(fileToDelete);
     }
+
+    public boolean fileExists(String fileName) {
+        Path filePath = loadFile(fileName);
+        return Files.exists(filePath);
+    }
 }
