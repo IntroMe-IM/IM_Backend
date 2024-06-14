@@ -10,6 +10,7 @@ services:
       JWT_SECRET: introme_jwt_secret
     volumes:
       - ./src/main/resources/application-server.yml:/app/application-server.yml
+      - ./local-upload-dir:/app/upload
   mysql:
     image: mysql:8.0
     environment:

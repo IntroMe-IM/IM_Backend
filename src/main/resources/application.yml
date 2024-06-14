@@ -21,6 +21,13 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
 
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+
 jwt:
   secret: introme_jwt_secret # JWT를 서명하는데 사용되는 비밀키
   expiration: 31449600000 # JWT의 만료 2시간 (밀리초 단위), 예: 604800000 밀리초는 1주일
@@ -46,3 +53,6 @@ sms:
   api-secret: "V1XAHEELEGV8OCJDCQFNJST1OZ5OQFSE"
   from-number: "01099157740"
   debug-code: "13579"
+
+file:
+  upload-dir: /app/upload
