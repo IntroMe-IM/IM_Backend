@@ -12,7 +12,6 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -67,7 +66,7 @@ public class Member {
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Block> blocks;
 
     public static Member saveToEntity(MemberSignUpRequest memberSignUpRequest) {

@@ -25,8 +25,8 @@ public class Block {
     @Column(nullable = false)
     private String previousHash;
 
-    @ManyToOne
-    @JoinColumn(name = "member_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id", nullable = true)
     private Member member;
 
     @Column(nullable = false)
@@ -38,9 +38,9 @@ public class Block {
     @Column(nullable = false)
     private String hash;
 
-    public Block(String previousHash, Member memberId, int contribution) {
+    public Block(String previousHash, Member member, int contribution) {
         this.previousHash = previousHash;
-        this.member = memberId;
+        this.member = member;
         this.contribution = contribution;
         this.timeStamp = LocalDateTime.now();
         this.hash = calculateHash();
@@ -48,7 +48,7 @@ public class Block {
 
     public Block(String previousHash, String hash) {
         this.previousHash = previousHash;
-        this.member = new Member();
+        this.member = null;
         this.contribution = 0;
         this.timeStamp = LocalDateTime.now();
         this.hash = hash;
@@ -56,6 +56,7 @@ public class Block {
 
     public String calculateHash() {
         String dataToHash = previousHash + member.getId() + contribution + timeStamp.toString();
+        System.out.println("make hash result = " + dataToHash);
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hashBytes = digest.digest(dataToHash.getBytes(StandardCharsets.UTF_8));

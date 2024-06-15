@@ -2,8 +2,8 @@ package kr.co.introme.introme.domain.blockchain.api;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import kr.co.introme.introme.domain.blockchain.dto.BlockResponse;
 import kr.co.introme.introme.domain.blockchain.application.BlockchainService;
-import kr.co.introme.introme.domain.blockchain.domain.Block;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class BlockchainApi {
 
     @Operation(summary = "block 조회", description = "해당 멤버의 블록을 조회합니다.")
     @GetMapping("/{memberId}")
-    public ResponseEntity<List<Block>> getBlockchain(@PathVariable Long memberId) {
+    public ResponseEntity<List<BlockResponse>> getBlockchain(@PathVariable Long memberId) {
         return ResponseEntity.ok(blockchainService.getBlockchainByMemberId(memberId));
     }
 
