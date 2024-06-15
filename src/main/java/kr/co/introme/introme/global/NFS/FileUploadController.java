@@ -26,9 +26,10 @@ public class FileUploadController {
     private final FileStorageService fileStorageService;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file,
+                                             @RequestParam("subDir") String subDir) {
         try {
-            String fileName = fileStorageService.storeFile(file);
+            String fileName = fileStorageService.storeFile(file, subDir);
             String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                     .path("/api/files/view/")
                     .path(fileName)

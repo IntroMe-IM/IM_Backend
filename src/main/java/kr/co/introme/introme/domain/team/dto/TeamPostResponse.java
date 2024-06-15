@@ -22,8 +22,10 @@ public class TeamPostResponse {
     private LocalDate create;
     private LocalDate terminate;
     private List<String> members;
+    private String image; // 이미지 URL 필드 추가
 
-    public TeamPostResponse(Long id, String name, Long owner, String ownerName, boolean finish, LocalDate create, LocalDate terminate, List<String> members) {
+
+    public TeamPostResponse(Long id, String name, Long owner, String ownerName, boolean finish, LocalDate create, LocalDate terminate, List<String> members, String image) {
         this.id = id;
         this.name = name;
         this.owner = owner;
@@ -32,5 +34,6 @@ public class TeamPostResponse {
         this.create = create;
         this.terminate = terminate;
         this.members = members;
+        this.image = image;
     }
 }

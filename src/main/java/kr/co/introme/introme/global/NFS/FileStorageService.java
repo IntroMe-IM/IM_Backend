@@ -36,9 +36,9 @@ public class FileStorageService {
         }
     }
 
-    public String storeFile(MultipartFile file) throws IOException {
+    public String storeFile(MultipartFile file, String subDir) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        Path uploadPath = Paths.get(uploadDir);
+        Path uploadPath = Paths.get(uploadDir, subDir);
 
         if (file.isEmpty()) {
             logger.warn("File is empty: " + fileName);
@@ -50,10 +50,13 @@ public class FileStorageService {
         }
 
         try {
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
             Path targetLocation = uploadPath.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
             logger.info("File uploaded successfully: " + targetLocation.toAbsolutePath().toString());
-            return fileName;
+            return subDir + "/" + fileName;
         } catch (IOException ex) {
             logger.error("Error occurred while uploading file: " + fileName, ex);
             throw new IOException("파일 업로드 중 문제가 발생했습니다: " + fileName, ex);

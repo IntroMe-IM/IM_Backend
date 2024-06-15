@@ -8,14 +8,18 @@ import kr.co.introme.introme.domain.board.dto.BoardPostRequest;
 import kr.co.introme.introme.domain.board.repository.BoardRepository;
 import kr.co.introme.introme.domain.member.domain.Member;
 import kr.co.introme.introme.domain.member.repository.MemberRepository;
+import kr.co.introme.introme.global.NFS.FileStorageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,16 +27,28 @@ import java.util.stream.Collectors;
 public class BoardPostService {
     private final BoardRepository boardRepository;
     private final MemberRepository memberRepository;
+    private final FileStorageService fileStorageService;
 
-    public String save(BoardPostRequest boardPostRequest) {
+    public String save(BoardPostRequest boardPostRequest, MultipartFile file) {
 
-        Member member = memberRepository.findById(boardPostRequest.getAuthor()).get();
-        if(member != null){
-            boardRepository.save(Board.saveToEntity(boardPostRequest, member));
-            return "ok";
-        } else {
+        Optional<Member> memberOptional = memberRepository.findById(boardPostRequest.getAuthor());
+        if (memberOptional.isEmpty()) {
             return "Not Found Member";
         }
+        Member member = memberOptional.get();
+        Board board = Board.saveToEntity(boardPostRequest, member);
+
+        if (file != null && !file.isEmpty()) {
+            try {
+                String filePath = fileStorageService.storeFile(file, "board");
+                board.setImgUrl(filePath);
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to store file", e);
+            }
+        }
+
+        boardRepository.save(board);
+        return "ok";
     }
 
     public void hit(Long boardId) {

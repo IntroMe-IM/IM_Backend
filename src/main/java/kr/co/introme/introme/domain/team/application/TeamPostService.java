@@ -1,6 +1,5 @@
 package kr.co.introme.introme.domain.team.application;
 
-import kr.co.introme.introme.domain.board.dto.BoardContentResponse;
 import kr.co.introme.introme.domain.member.domain.Member;
 import kr.co.introme.introme.domain.member.repository.MemberRepository;
 import kr.co.introme.introme.domain.team.domain.Team;
@@ -32,7 +31,7 @@ public class TeamPostService {
                         teams.getOwnerId(),
                         teams.getMembers().stream()
                                 .filter(members -> members.getId().equals(teams.getOwnerId()))
-                                .map(members -> members.getName())
+                                .map(Member::getName)
                                 .findFirst()
                                 .orElse(null),
                         teams.getTerminateDate() != null,
@@ -40,7 +39,8 @@ public class TeamPostService {
                         teams.getTerminateDate(),
                         teams.getMembers().stream()
                                 .map(Member::getName)
-                                .collect(Collectors.toList())
+                                .collect(Collectors.toList()),
+                        teams.getImage() // 이미지 URL 추가
                 ))
                 .collect(Collectors.toList());
 
@@ -50,9 +50,8 @@ public class TeamPostService {
     @Transactional(readOnly = true)
     public TeamDetailResponse getTeamOne(Long teamId) {
         Team team = teamRepository.findById(teamId).get();
-        if(team != null){
-            TeamDetailResponse teamDetail = new TeamDetailResponse(team);
-            return teamDetail;
+        if (team != null) {
+            return new TeamDetailResponse(team);
         } else {
             return null;
         }

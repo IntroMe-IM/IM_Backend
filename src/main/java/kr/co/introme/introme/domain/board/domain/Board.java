@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -33,6 +34,7 @@ public class Board {
     private LocalDate createAt;
 
     @Column
+    @UpdateTimestamp
     private LocalDate updateAt;
 
     @Column
