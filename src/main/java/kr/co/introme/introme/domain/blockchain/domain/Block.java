@@ -1,6 +1,7 @@
 package kr.co.introme.introme.domain.blockchain.domain;
 
 import jakarta.persistence.*;
+import kr.co.introme.introme.domain.member.domain.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,8 +25,9 @@ public class Block {
     @Column(nullable = false)
     private String previousHash;
 
-    @Column(nullable = false)
-    private Long memberId;
+    @ManyToOne
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
 
     @Column(nullable = false)
     private int contribution;
@@ -36,9 +38,9 @@ public class Block {
     @Column(nullable = false)
     private String hash;
 
-    public Block(String previousHash, Long memberId, int contribution) {
+    public Block(String previousHash, Member memberId, int contribution) {
         this.previousHash = previousHash;
-        this.memberId = memberId;
+        this.member = memberId;
         this.contribution = contribution;
         this.timeStamp = LocalDateTime.now();
         this.hash = calculateHash();
@@ -46,14 +48,14 @@ public class Block {
 
     public Block(String previousHash, String hash) {
         this.previousHash = previousHash;
-        this.memberId = 0L;
+        this.member = new Member();
         this.contribution = 0;
         this.timeStamp = LocalDateTime.now();
         this.hash = hash;
     }
 
     public String calculateHash() {
-        String dataToHash = previousHash + memberId + contribution + timeStamp.toString();
+        String dataToHash = previousHash + member.getId() + contribution + timeStamp.toString();
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hashBytes = digest.digest(dataToHash.getBytes(StandardCharsets.UTF_8));

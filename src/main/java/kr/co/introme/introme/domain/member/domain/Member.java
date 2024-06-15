@@ -1,6 +1,7 @@
 package kr.co.introme.introme.domain.member.domain;
 
 import jakarta.persistence.*;
+import kr.co.introme.introme.domain.blockchain.domain.Block;
 import kr.co.introme.introme.domain.board.domain.Board;
 import kr.co.introme.introme.domain.board.domain.Comment;
 import kr.co.introme.introme.domain.member.dto.MemberSignUpRequest;
@@ -65,6 +66,9 @@ public class Member {
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
+
+    @OneToMany(mappedBy = "member")
+    private List<Block> blocks;
 
     public static Member saveToEntity(MemberSignUpRequest memberSignUpRequest) {
         Member member = new Member();
