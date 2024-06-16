@@ -57,7 +57,7 @@ public class FileStorageService {
             Path targetLocation = uploadPath.resolve(fileNameNew);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
             logger.info("File uploaded successfully: " + targetLocation.toAbsolutePath().toString());
-            return subDir + "/" + fileNameNew;
+            return "/image" + subDir + "/" + fileNameNew;
         } catch (IOException ex) {
             logger.error("Error occurred while uploading file: " + fileName, ex);
             throw new IOException("파일 업로드 중 문제가 발생했습니다: " + fileName, ex);
