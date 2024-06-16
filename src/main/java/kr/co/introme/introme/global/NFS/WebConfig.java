@@ -10,6 +10,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/app/upload/**")
-                .addResourceLocations("file:///Users/inlee/Desktop/workspace/");
+                .addResourceLocations("file:///home/inlee/Desktop/workspace/introme/IM_Backend/local-upload-dir");
     }
 }
