@@ -37,17 +37,17 @@ public class BoardPostService {
         }
         Member member = memberOptional.get();
         Board board = Board.saveToEntity(boardPostRequest, member);
-
+        boardRepository.save(board);
+        Long id = boardRepository.count();
         if (file != null && !file.isEmpty()) {
             try {
-                String filePath = fileStorageService.storeFile(file, "board");
+                String filePath = fileStorageService.storeFile(file,"board", id);
                 board.setImgUrl(filePath);
             } catch (IOException e) {
                 throw new RuntimeException("Failed to store file", e);
             }
         }
 
-        boardRepository.save(board);
         return "ok";
     }
 

@@ -33,17 +33,18 @@ public class TeamBuildService {
         Team team = Team.saveToEntity(teamBuildRequest);
         team.setOwnerId(userId);
 
+        teamRepository.save(team);
+        team.addMember(member);
+        teamRepository.save(team);
+
+        Long id = teamRepository.count();
         if (file != null && !file.isEmpty()) {
             try {
-                String filePath = fileStorageService.storeFile(file, "team");
+                String filePath = fileStorageService.storeFile(file, "team", id);
                 team.setImage(filePath);
             } catch (IOException e) {
                 throw new RuntimeException("Failed to store file", e);
             }
         }
-
-        teamRepository.save(team);
-        team.addMember(member);
-        teamRepository.save(team);
     }
 }
