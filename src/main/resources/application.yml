@@ -36,7 +36,7 @@ server:
   forward-headers-strategy: FRAMEWORK
 
 cors:
-  allowed-origins: "https://introme.co.kr"
+  allowed-origins: "*"
   allowed-methods: "GET,POST,PUT,DELETE,OPTIONS"
   allowed-headers: "*"
   allow-credentials: true
