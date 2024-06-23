@@ -66,22 +66,12 @@ public class BlockchainService {
         for (int i = 2; i < blockList.size(); i++) {
             Block currentBlock = blockchain.get(memberList.get(i)-1); // memberId 1 -> 2, 4 / block.index->1, 3 = 0
             Block previousBlock = blockchain.get(memberList.get(i)-2); // -1  out of index
-            System.out.println("this blockList's index = " + memberList.get(i));
-            System.out.println("Block's index = " + blockchain.get(memberList.get(i)-1).getId());
 
             if (!currentBlock.getHash().equals(currentBlock.calculateHash())) {
-                System.out.println("this is now block-------------------------");
-                System.out.println("currentBlock Hash = " + currentBlock.getHash());
-                System.out.println("calculate Hash result = " + currentBlock.calculateHash());
-                System.out.println("------------------------------------------");
                 return false;
             }
 
             if (!currentBlock.getPreviousHash().equals(previousBlock.getHash())) {
-                System.out.println("this is previous block---------------------");
-                System.out.println("currentBlock Hash = " + previousBlock.getHash());
-                System.out.println("calculate Hash result = " + previousBlock.calculateHash());
-                System.out.println("------------------------------------------");
                 return false;
             }
         }
