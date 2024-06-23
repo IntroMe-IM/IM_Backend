@@ -1,7 +1,8 @@
 package kr.co.introme.introme.domain.team.application;
 
+import kr.co.introme.introme.domain.blockchain.application.BlockchainService;
+import kr.co.introme.introme.domain.member.domain.Member;
 import kr.co.introme.introme.domain.team.domain.Team;
-import kr.co.introme.introme.domain.team.dto.TeamPostResponse;
 import kr.co.introme.introme.domain.team.dto.TeamTerminateRequest;
 import kr.co.introme.introme.domain.team.dto.TeamUpdateRequest;
 import kr.co.introme.introme.domain.team.repository.TeamRepository;
@@ -10,14 +11,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
 
 
 @Service
 @RequiredArgsConstructor
 public class TeamUpdateService {
     private final TeamRepository teamRepository;
+    private final BlockchainService blockchainService;
 
 
+    @Transactional
     public String terminate(TeamTerminateRequest teamTerminateRequest) {
         //Find Team
         Team team = teamRepository.findById(teamTerminateRequest.getTeamId()).get();
@@ -29,6 +34,14 @@ public class TeamUpdateService {
                 LocalDate now = LocalDate.now();
                 team.setTerminateDate(now);
                 teamRepository.save(team);
+                //block chaining
+                HashMap<Long, Integer> members = teamTerminateRequest.getContribute();
+                List<Long> member = team.getMembers().stream().map(Member::getId).toList();
+                for(Integer i = 0; i < member.size() ; i++){
+                    Long id = member.get(i);
+                    Integer con = members.get(id);
+                    blockchainService.addBlock(id, con);
+                }
                 return now.toString();
             }else {
                 //Already
