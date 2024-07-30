@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 
 @RestController
@@ -24,6 +26,14 @@ public class CardApi {
     public ResponseEntity<String> getShareUrl(@PathVariable Long memberId) {
         String shareUrl = cardService.getShareUrl(memberId);
         return ResponseEntity.ok(shareUrl);
+    }
+
+    @Operation(summary = "공유 받은 명함 미리보기", description = "공유받을 명함을 미리보기 위해 조회합니다.")
+    @GetMapping("/preview/{encodedData}")
+    public ResponseEntity<CardDTO> getCardByDecode(@PathVariable String encodedData){
+        Long ownerId = Long.parseLong(new String(Base64.getDecoder().decode(encodedData), StandardCharsets.UTF_8));
+        CardDTO cardDTO = cardService.getCardInfo(ownerId);
+        return ResponseEntity.ok(cardDTO);
     }
 
     @Operation(summary = "명함 공유", description = "해싱된 URL을 통해 명함을 다른 회원과 공유합니다.")
