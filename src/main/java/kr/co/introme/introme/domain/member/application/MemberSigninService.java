@@ -52,6 +52,14 @@ public class MemberSigninService {
         return null;
     }
 
+    public Long findMemberByEmail(String email){
+        Member member = memberRepository.findByEmail(email);
+        if(member != null){
+            return member.getId();
+        }
+        return null;
+    }
+
     public Boolean updating(Long memberId, MemberUpdateRequest memberUpdateRequest) {
         Member member = memberRepository.findById(memberId).get();
         if(member != null){

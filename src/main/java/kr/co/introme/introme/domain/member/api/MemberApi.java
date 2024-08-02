@@ -14,6 +14,7 @@ import net.nurigo.sdk.message.model.Message;
 import net.nurigo.sdk.message.service.DefaultMessageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import retrofit2.http.Path;
 
 import java.util.Map;
 
@@ -76,6 +77,18 @@ public class MemberApi {
     public ResponseEntity<MemberResponse> memberReturn(@PathVariable Long memberId){
         MemberResponse result = memberSigninService.findMember(memberId);
         return ResponseEntity.ok(result);
+    }
+
+    @Operation(summary = "회원 id 반환", description = "이메일을 기반으로 회원의 id를 제공")
+    @GetMapping("/{email}")
+    public ResponseEntity<String> returnId(@PathVariable String email){
+        Long result = memberSigninService.findMemberByEmail(email);
+        if(result != null){
+            return ResponseEntity.ok(result.toString());
+        }else {
+            return ResponseEntity.ok("does not exist");
+        }
+
     }
 
     @Operation(summary = "회원 정보 수정", description = "회원의 정보를 수정합니다.")
