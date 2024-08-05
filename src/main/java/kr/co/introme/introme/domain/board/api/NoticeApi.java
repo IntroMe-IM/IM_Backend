@@ -1,0 +1,42 @@
+package kr.co.introme.introme.domain.board.api;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import kr.co.introme.introme.domain.board.application.NoticeService;
+import kr.co.introme.introme.domain.board.dto.NoticePostRequest;
+import kr.co.introme.introme.domain.board.dto.NoticePostResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+@Tag(name = "공지사항 API", description = "공지사항 페이지네이션, 작성, 조회")
+@Controller
+@RequestMapping("/v1/notice")
+@RequiredArgsConstructor
+public class NoticeApi {
+    private final NoticeService noticeService;
+
+    @Operation(summary = "공지사항 작성", description = "공지사항 작성 정보를 저장합니다.")
+    @PostMapping("/")
+    public ResponseEntity<String> save(@RequestBody NoticePostRequest request){
+        boolean result = noticeService.save(request);
+        if(result){
+            return ResponseEntity.ok("작성 완료");
+        } else {
+            return ResponseEntity.ok("비밀번호를 확인하세요");
+        }
+    }
+
+    @Operation(summary = "공지사항 조회", description = "공지사항 작성 정보를 가져옵니다.")
+    @GetMapping("/{id}")
+    public ResponseEntity<NoticePostResponse> getNotice(@PathVariable Long id){
+        NoticePostResponse response = noticeService.getOne(id);
+        if(response != null){
+            return ResponseEntity.ok(response);
+        } else {
+            return null;
+        }
+    }
+
+}
