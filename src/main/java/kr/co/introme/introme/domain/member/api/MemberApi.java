@@ -80,7 +80,7 @@ public class MemberApi {
     }
 
     @Operation(summary = "회원 id 반환", description = "이메일을 기반으로 회원의 id를 제공")
-    @GetMapping("/{email}")
+    @GetMapping("/v/{email}")
     public ResponseEntity<String> returnId(@PathVariable String email){
         Long result = memberSigninService.findMemberByEmail(email);
         if(result != null){
