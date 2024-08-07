@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.co.introme.introme.domain.board.application.NoticeService;
 import kr.co.introme.introme.domain.board.dto.NoticePostRequest;
 import kr.co.introme.introme.domain.board.dto.NoticePostResponse;
+import kr.co.introme.introme.domain.board.dto.NoticeUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,19 @@ public class NoticeApi {
         }
     }
 
+    @Operation(summary = "공지사항 업데이트", description = "공지사항의 정보를 업데이트합니다,")
+    @PutMapping("/")
+    public ResponseEntity<String> updateNotice(@RequestBody NoticeUpdateRequest request){
+        String response = noticeService.update(request);
+        if(response == null){
+            return ResponseEntity.ok("업데이트 실패");
+        }else {
+            return ResponseEntity.ok(response;
+        }
+    }
+
+
+
     @Operation(summary = "공지사항 조회", description = "공지사항 작성 정보를 가져옵니다.")
     @GetMapping("/{id}")
     public ResponseEntity<NoticePostResponse> getNotice(@PathVariable Long id){
@@ -38,5 +52,7 @@ public class NoticeApi {
             return null;
         }
     }
+
+
 
 }
