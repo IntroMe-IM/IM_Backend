@@ -57,4 +57,6 @@ sms:
 file:
   upload-dir: /app/upload
 
-
+security:
+  password:
+    hash: "$argon2id$v=19$m=65536,t=4,p=1$8SwJlyoCK3EuC5jJ/8hsbA$BOlACv3XjkzFHI5v/z8RZ60YdjjJ6V64t8d7OxJFzb0"
