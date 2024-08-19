@@ -1,23 +1,23 @@
 package kr.co.introme.introme.domain.board.application;
 
 import kr.co.introme.introme.domain.board.domain.Notice;
-import kr.co.introme.introme.domain.board.dto.NoticeDeleteRequest;
-import kr.co.introme.introme.domain.board.dto.NoticePostRequest;
-import kr.co.introme.introme.domain.board.dto.NoticePostResponse;
-import kr.co.introme.introme.domain.board.dto.NoticeUpdateRequest;
+import kr.co.introme.introme.domain.board.dto.*;
 import kr.co.introme.introme.domain.board.repository.NoticeRepository;
-import kr.co.introme.introme.global.config.ArgonEncoder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import jakarta.transaction.Transactional;
 
-import java.util.Objects;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class NoticeService {
     private final NoticeRepository noticeRepository;
-    private final ArgonEncoder argonEncoder;
 
     public boolean save(NoticePostRequest request) {
         if(request.getCode().equals("pass")){
@@ -30,10 +30,15 @@ public class NoticeService {
 
     public NoticePostResponse getOne(Long id) {
         Notice notice = noticeRepository.findById(id).get();
+        return NoticePostResponse.saveToDto(notice);
+    }
+
+    @Transactional
+    public void hit(Long id){
+        Notice notice = noticeRepository.findById(id).get();
         Integer plus = notice.getHit() + 1;
         notice.setHit(plus);
         noticeRepository.save(notice);
-        return NoticePostResponse.saveToDto(notice);
     }
 
     @Transactional
@@ -62,5 +67,26 @@ public class NoticeService {
         } else {
             return "없는 게시물";
         }
+    }
+
+    public NoticePageResponse<NoticePostResponse> getNoticeList(NoticePageRequest noticePageRequest) {
+        Pageable pageable = PageRequest.of(noticePageRequest.getPage(), noticePageRequest.getSize(), Sort.by(Sort.Order.desc("createAt")));
+        Page<Notice> noticePage = noticeRepository.findAll(pageable);
+        List<NoticePostResponse> contents = noticePage.getContent().stream().map( notice -> NoticePostResponse.noticePage(
+                notice.getId(),
+                notice.getTitle(),
+                notice.getCreateAt(),
+                notice.getUpdateAt(),
+                notice.getHit()
+        )).collect(Collectors.toList());
+        return new NoticePageResponse<>(
+                noticePage.getTotalPages(),
+                noticePage.getTotalElements(),
+                noticePage.getSize(),
+                noticePage.getNumber(),
+                contents,
+                noticePage.isFirst(),
+                noticePage.isLast()
+        );
     }
 }

@@ -1,7 +1,6 @@
 package kr.co.introme.introme.domain.board.domain;
 
 import jakarta.persistence.*;
-import kr.co.introme.introme.domain.board.dto.NoticePostResponse;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

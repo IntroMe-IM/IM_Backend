@@ -13,6 +13,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @ToString
 public class NoticePostResponse {
+    private Long id;
+
     private String title;
 
     private String contents;
@@ -28,11 +30,21 @@ public class NoticePostResponse {
     public static NoticePostResponse saveToDto(Notice notice) {
         NoticePostResponse response = new NoticePostResponse();
         response.title = notice.getTitle();
-        response.contents = notice.getTitle();
+        response.contents = notice.getContents();
         response.createAt = notice.getCreateAt();
         response.updateAt = notice.getUpdateAt();
         response.img = notice.getImg();
         response.hit = notice.getHit();
         return response;
+    }
+
+    public static NoticePostResponse noticePage(Long id, String title, LocalDate createAt, LocalDate updateAt, Integer hit){
+        NoticePostResponse contents = new NoticePostResponse();
+        contents.setId(id);
+        contents.setTitle(title);
+        contents.setCreateAt(createAt);
+        contents.setUpdateAt(updateAt);
+        contents.setHit(hit);
+        return contents;
     }
 }

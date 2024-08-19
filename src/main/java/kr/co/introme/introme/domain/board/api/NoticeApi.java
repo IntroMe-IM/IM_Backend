@@ -3,10 +3,7 @@ package kr.co.introme.introme.domain.board.api;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.co.introme.introme.domain.board.application.NoticeService;
-import kr.co.introme.introme.domain.board.dto.NoticeDeleteRequest;
-import kr.co.introme.introme.domain.board.dto.NoticePostRequest;
-import kr.co.introme.introme.domain.board.dto.NoticePostResponse;
-import kr.co.introme.introme.domain.board.dto.NoticeUpdateRequest;
+import kr.co.introme.introme.domain.board.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -55,6 +52,7 @@ public class NoticeApi {
     @Operation(summary = "공지사항 조회", description = "공지사항 작성 정보를 가져옵니다.")
     @GetMapping("/{id}")
     public ResponseEntity<NoticePostResponse> getNotice(@PathVariable Long id){
+        noticeService.hit(id);
         NoticePostResponse response = noticeService.getOne(id);
         if(response != null){
             return ResponseEntity.ok(response);
@@ -63,6 +61,11 @@ public class NoticeApi {
         }
     }
 
-
+    @Operation(summary = "공자사항 페이지네이션", description = "공지사항 전체를 가져옵니다.")
+    @PostMapping("/page")
+    public ResponseEntity<NoticePageResponse<NoticePostResponse>> getNoticePage(@RequestBody NoticePageRequest noticePageRequest){
+        NoticePageResponse<NoticePostResponse> response = noticeService.getNoticeList(noticePageRequest);
+        return ResponseEntity.ok(response);
+    }
 
 }
